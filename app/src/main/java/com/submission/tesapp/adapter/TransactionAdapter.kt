@@ -4,11 +4,17 @@ import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.submission.tesapp.data.model.TransactionModel
+import com.submission.tesapp.databinding.ItemTransactionsBinding
 
 class TransactionAdapter(private val context: Context) : ListAdapter<TransactionModel, TransactionAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    inner class MyViewHolder {
+    inner class MyViewHolder(private val binding: ItemTransactionsBinding) : ViewHolder(binding.root) {
+        fun bind(userData: TransactionModel) {
+            with(binding) {
 
+            }
+        }
     }
 
     companion object {

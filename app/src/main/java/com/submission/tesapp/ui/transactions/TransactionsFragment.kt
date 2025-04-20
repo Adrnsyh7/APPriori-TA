@@ -27,8 +27,6 @@ class TransactionsFragment : Fragment() {
     private lateinit var adapter: TransactionAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = TransactionAdapter()
-        val layoutManager= LinearLayoutManager(requireContext())
 
     }
 

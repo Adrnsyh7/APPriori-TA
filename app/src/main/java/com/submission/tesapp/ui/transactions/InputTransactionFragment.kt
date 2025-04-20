@@ -44,8 +44,6 @@ class InputTransactionFragment : Fragment(), DatePickerFragment.DialogDateListen
         }
 
 
-
-
     }
 
     private fun saveTransactions() {
