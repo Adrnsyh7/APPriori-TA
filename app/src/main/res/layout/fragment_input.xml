@@ -85,29 +85,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_layout">
-
-        <ImageButton
-            android:id="@+id/clock"
-            style="@style/Base.Widget.AppCompat.ImageButton"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="date"
-            android:src="@drawable/baseline_clock_24"/>
-
-
-        <TextView
-            android:id="@+id/add_clock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            tools:text="Due date" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/date_layout"/>
 
     <Button
         android:id="@+id/btn_input"

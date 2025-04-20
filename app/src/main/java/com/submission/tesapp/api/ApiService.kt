@@ -10,6 +10,6 @@ interface ApiService {
 
     @POST("apriori")
     suspend fun getApriori(
-        @Body aprioriData: AprioriData
+        @Body requestBody: Map<String, List<Int>>
     ) : Response<AprioriResponse>
 }
