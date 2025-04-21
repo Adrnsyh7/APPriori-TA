@@ -14,7 +14,7 @@ class FirebaseDataManager {
         "item" to item,
         "date" to Timestamp(date/1000, 0)
     )
-    firestore.collection("admin").document().collection("transactions")
+    firestore.collection("transactions")
         .add(transactions)
         .addOnSuccessListener {
             callback.invoke(true)
