@@ -1,13 +1,19 @@
 package com.submission.tesapp.ui.process
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import com.submission.tesapp.R
+import com.submission.tesapp.ViewModelFactory
+import com.submission.tesapp.data.model.TransactionModel
+import com.submission.tesapp.data.response.AprioriData
+import com.submission.tesapp.data.response.Data
 import com.submission.tesapp.databinding.FragmentProcessBinding
 import java.sql.Timestamp
 import java.util.Calendar
@@ -25,6 +31,9 @@ class ProcessFragment : Fragment() {
     private var startTimestamp: Long? = null
     private var endTimeStamp: Long? = null
     private val db = FirebaseFirestore.getInstance()
+    private val viewModel by viewModels<ProcessViewModel> {
+        ViewModelFactory.getInstance()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,6 +81,22 @@ class ProcessFragment : Fragment() {
                 .whereGreaterThan("date",start)
                 .whereLessThan("date",end)
                 .get()
+                .addOnSuccessListener {transactionSnapshot ->
+                    val transactionsByDate = mutableMapOf<String, MutableList<String>>()
+                    for(document in transactionSnapshot) {
+                        val id = document.id
+                        val date = document.getTimestamp("date")?.toDate()?.toString()
+                        val item = document.getString("obat")
+                        if (date != null && item != null) {
+                            transactionsByDate.getOrPut(date) { mutableListOf() }.add(item)
+                        }
+                        val aprioriInput = AprioriData(transactionsByDate)
+                        viewModel.fetchApriori(aprioriInput)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching transactions: ", e)
+                }
 
 
         }

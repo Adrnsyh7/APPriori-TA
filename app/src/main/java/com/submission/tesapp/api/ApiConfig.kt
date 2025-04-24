@@ -1,6 +1,6 @@
 package com.submission.tesapp.api
 
-import com.google.firebase.appdistribution.gradle.ApiService
+
 import com.submission.tesapp.utils.GateApi
 import io.grpc.android.BuildConfig
 import retrofit2.converter.gson.GsonConverterFactory
