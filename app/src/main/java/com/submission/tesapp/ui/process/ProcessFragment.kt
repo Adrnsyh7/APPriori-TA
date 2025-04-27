@@ -11,6 +11,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import com.submission.tesapp.R
 import com.submission.tesapp.ViewModelFactory
+import com.submission.tesapp.data.ResultState
 import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.data.response.AprioriData
 import com.submission.tesapp.data.response.Data
@@ -84,14 +85,26 @@ class ProcessFragment : Fragment() {
                 .addOnSuccessListener {transactionSnapshot ->
                     val transactionsByDate = mutableMapOf<String, MutableList<String>>()
                     for(document in transactionSnapshot) {
-                        val id = document.id
                         val date = document.getTimestamp("date")?.toDate()?.toString()
                         val item = document.getString("obat")
                         if (date != null && item != null) {
                             transactionsByDate.getOrPut(date) { mutableListOf() }.add(item)
                         }
                         val aprioriInput = AprioriData(transactionsByDate)
-                        viewModel.fetchApriori(aprioriInput)
+                        viewModel.fetchApriori(aprioriInput).observe(viewLifecycleOwner) {result ->
+                            when(result) {
+                                is ResultState.Loading -> {
+
+                                }
+                                is ResultState.Success -> {
+
+                                }
+                                is ResultState.Error -> {
+
+                                }
+                            }
+
+                        }
                     }
                 }
                 .addOnFailureListener { e ->

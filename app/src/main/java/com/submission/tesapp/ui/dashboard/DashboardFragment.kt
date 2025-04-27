@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.submission.tesapp.R
-import com.submission.tesapp.ui.ARG_PARAM1
-import com.submission.tesapp.ui.ARG_PARAM2
 
 /**
  * A simple [Fragment] subclass.
