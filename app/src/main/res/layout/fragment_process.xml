@@ -68,7 +68,7 @@
             tools:hint="Amount">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_ed_amount"
+                android:id="@+id/min_sup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"

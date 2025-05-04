@@ -87,10 +87,12 @@ class ProcessFragment : Fragment() {
                     for(document in transactionSnapshot) {
                         val date = document.getTimestamp("date")?.toDate()?.toString()
                         val item = document.getString("obat")
+                        val support = binding.minSup.text.toString().toDouble()
+                        val conf = binding.minConf.text.toString().toDouble()
                         if (date != null && item != null) {
                             transactionsByDate.getOrPut(date) { mutableListOf() }.add(item)
                         }
-                        val aprioriInput = AprioriData(transactionsByDate)
+                        val aprioriInput = AprioriData(transactionsByDate, support, conf)
                         viewModel.fetchApriori(aprioriInput).observe(viewLifecycleOwner) {result ->
                             when(result) {
                                 is ResultState.Loading -> {
