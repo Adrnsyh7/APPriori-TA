@@ -2,4 +2,20 @@
     <string name="app_name">TesApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    login pages-->
+    <string name="title_login">Login</string>
+    <string name="message_login">Please login to continue</string>
+    <string name="dont_have_an_account">Don\'t have an account? Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_name">Nama</string>
+    <string name="btn_login_text">Login</string>
+    <string name="pref_key_notify">key_notification</string>
+    <string name="pref_notify_name">Notification</string>
+    <string name="pref_notify_summary">Reminder when countdown has finished.</string>
+    <string name="notify_channel_name">Habit Reminder</string>
+    <string name="notify_content">Time Up!</string>
+
 </resources>

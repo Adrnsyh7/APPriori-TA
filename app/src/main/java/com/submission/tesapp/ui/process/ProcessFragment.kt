@@ -1,6 +1,7 @@
 package com.submission.tesapp.ui.process
 
 import android.content.ClipData.Item
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -78,6 +79,9 @@ class ProcessFragment : Fragment() {
                 binding.addTvDueDate.text = datePicker.headerText
             }
         }
+        binding.btnProcess.setOnClickListener {
+            processApriori()
+        }
     }
 
     fun processApriori() {
@@ -129,7 +133,8 @@ class ProcessFragment : Fragment() {
                                     itemset2lAdapter.submitList(result.data.data?.itemset2Lolos)
                                     itemset3Adapter.submitList(result.data.data?.itemset3)
                                     itemset3lAdapter.submitList(result.data.data?.itemset3Lolos)
-                                    findNavController().navigate(R.id.resultFragment)
+                                    val intent = Intent(context, ResultFragment::class.java)
+                                    startActivity(intent)
                                 }
                                 is ResultState.Error -> {
 
@@ -146,25 +151,5 @@ class ProcessFragment : Fragment() {
 
         }
 
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProcessFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProcessFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

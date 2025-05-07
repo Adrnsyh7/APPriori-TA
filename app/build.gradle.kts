@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.submission.tesapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.submission.tesapp"
@@ -29,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -52,12 +52,23 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
     implementation("androidx.navigation:navigation-fragment:2.7.5")
-    implementation("com.google.firebase:firebase-firestore:24.10.0")
+
+
+
+   implementation("com.google.firebase:firebase-firestore:24.10.0")
     implementation("io.coil-kt:coil:2.5.0")
+    //implementation("com.android.tools.build:gradle:7.1.0-alpha12")
+
     //card
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.firebase:firebase-appdistribution-gradle:5.1.1")
-    implementation("com.google.firebase:firebase-auth-ktx:23.2.0")
+
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation ("com.github.bumptech.glide:glide:4.13.2")
+
+
+    //implementation("com.google.firebase:firebase-appdistribution-gradle:5.1.1")
+   //implementation("com.google.firebase:firebase-auth-ktx:23.2.0")
 
     //bar
 //    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
@@ -77,10 +88,12 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation ("androidx.room:room-ktx:2.5.1")
 
+//    implementation("androidx.work:work-runtime:2.8.1")
+//    implementation("com.loopj.android:android-async-http:1.4.10")
+//
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
 
 }

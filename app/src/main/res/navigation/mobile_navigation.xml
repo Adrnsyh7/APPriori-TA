@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mobile_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_dashboard">
 
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.submission.tesapp.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/nav_transactions"
+        android:name="com.submission.tesapp.ui.transactions.TransactionsFragment"
+        android:label="Transactions"
+        tools:layout="@layout/fragment_transactions" />
+    <fragment
+        android:id="@+id/nav_process"
+        android:name="com.submission.tesapp.ui.process.ProcessFragment"
+        android:label="Process"
+        tools:layout="@layout/fragment_process" />
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="com.submission.tesapp.ui.report.ReportFragment"
+        android:label="Report"
+        tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/nav_input"
+        android:name="com.submission.tesapp.ui.transactions.InputTransactionFragment"
+        android:label="Input"
+        tools:layout="@layout/fragment_input" />
 </navigation>

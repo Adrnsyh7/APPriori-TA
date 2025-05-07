@@ -34,13 +34,13 @@ data class AssociationRulesItem(
 	val consequents: List<String?>? = null,
 
 	@field:SerializedName("confidence")
-	val confidence: Any? = null,
+	val confidence: Double? = null,
 
 	@field:SerializedName("lift")
-	val lift: Any? = null,
+	val lift: Double? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null,
+	val support: Double? = null,
 
 	@field:SerializedName("antecedents")
 	val antecedents: List<String?>? = null
@@ -56,7 +56,7 @@ data class Itemset2Item(
 	val itemsets: List<String?>? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null
+	val support: Double? = null
 ) : Parcelable
 
 @Parcelize
@@ -79,7 +79,7 @@ data class Itemset1LolosItem(
 	val itemsets: List<String?>? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null
+	val support: Double? = null
 ) : Parcelable
 
 @Parcelize
@@ -92,7 +92,7 @@ data class Itemset3Item(
 	val itemsets: List<String?>? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null
+	val support: Double? = null
 ) : Parcelable
 
 @Parcelize
@@ -130,7 +130,7 @@ data class Itemset1Item(
 	val itemsets: List<String?>? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null
+	val support: Double? = null
 ) : Parcelable
 
 @Parcelize
@@ -143,5 +143,5 @@ data class Itemset2LolosItem(
 	val itemsets: List<String?>? = null,
 
 	@field:SerializedName("support")
-	val support: Any? = null
+	val support: Double? = null
 ) : Parcelable
