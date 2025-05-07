@@ -5,56 +5,85 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.tesapp.R
+import com.submission.tesapp.ViewModelFactory
+import com.submission.tesapp.adapter.Itemset1Adapter
+import com.submission.tesapp.adapter.Itemset1lAdapter
+import com.submission.tesapp.adapter.Itemset2Adapter
+import com.submission.tesapp.adapter.Itemset2lAdapter
+import com.submission.tesapp.adapter.Itemset3Adapter
+import com.submission.tesapp.adapter.Itemset3lAdapter
+import com.submission.tesapp.databinding.FragmentProcessBinding
+import com.submission.tesapp.databinding.FragmentResultBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var itemset1Adapter: Itemset1Adapter
+    private lateinit var itemset1lAdapter: Itemset1lAdapter
+    private lateinit var itemset2Adapter: Itemset2Adapter
+    private lateinit var itemset2lAdapter: Itemset2lAdapter
+    private lateinit var itemset3Adapter: Itemset3Adapter
+    private lateinit var itemset3lAdapter: Itemset3lAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentResultBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel by viewModels<ProcessViewModel> {
+        ViewModelFactory.getInstance()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false)
+        _binding = FragmentResultBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        itemset1Adapter = Itemset1Adapter()
+        itemset1lAdapter = Itemset1lAdapter()
+        itemset2Adapter = Itemset2Adapter()
+        itemset2lAdapter = Itemset2lAdapter()
+        itemset3Adapter = Itemset3Adapter()
+        itemset3lAdapter = Itemset3lAdapter()
+
+        with(binding) {
+            rvItemset1.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset1Adapter
             }
+            rvItemset1lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset1lAdapter
+            }
+            rvItemset2.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset2Adapter
+            }
+            rvItemset2lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset2lAdapter
+            }
+            rvItemset3.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset3Adapter
+            }
+            rvItemset3lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset3lAdapter
+            }
+
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.submission.tesapp.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TableLayout
 import androidx.recyclerview.widget.DiffUtil
@@ -38,9 +39,7 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
             binding.tvItem.text = itemset1.itemsets.toString()
             binding.tvJumlah.text = itemset1.length.toString()
             binding.tvSupport.text = itemset1.support.toString()
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+            binding.tvKeterangan.text
         }
 
 
@@ -64,11 +63,13 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val binding = ItemResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
 
@@ -80,9 +81,10 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset1l: Itemset1LolosItem) {
 
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+            with(binding) {
+                tvItem.text = itemset1l.itemsets.toString()
+                tvSupport.text= itemset1l.support.toString()
+            }
         }
 
 
@@ -107,11 +109,13 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val binding = ItemResultItemset1LBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Itemset1lAdapter.ViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
 
@@ -121,11 +125,13 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1l: Itemset1LolosItem) {
-
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+        fun bind(itemset2: Itemset2Item) {
+            with(binding) {
+                tvItem1.text = itemset2.itemsets.toString()
+                tvItem2.text = itemset2.itemsets.toString()
+                tvSupport.text = itemset2.support.toString()
+                tvKeterangan.text
+            }
         }
 
 
@@ -149,12 +155,14 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Itemset2Adapter.ViewHolder {
+        val binding = ItemResultItemset2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Itemset2Adapter.ViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: Itemset2Adapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
 
@@ -164,11 +172,15 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1l: Itemset2LolosItem) {
+        fun bind(itemset2l: Itemset2LolosItem) {
+            with(binding) {
+                with(binding) {
+                    tvItem1.text = itemset2l.itemsets.toString()
+                    tvItem2.text = itemset2l.itemsets.toString()
+                    tvSupport.text = itemset2l.support.toString()
 
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+                }
+            }
         }
 
 
@@ -192,12 +204,14 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Itemset2lAdapter.ViewHolder {
+        val binding = ItemResultItemset2LBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Itemset2lAdapter.ViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: Itemset2lAdapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
 
@@ -207,11 +221,15 @@ class Itemset3Adapter : ListAdapter<Itemset3Item, Itemset3Adapter.ViewHolder>(DI
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1l: Itemset3Item) {
-
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+        fun bind(itemset3: Itemset3Item) {
+            with(binding) {
+                tvItem1.text
+                tvItem2.text
+                tvItem3.text
+                tvSupport.text
+                tvKeterangan.text
+                tvJumlah.text
+            }
         }
 
 
@@ -235,12 +253,14 @@ class Itemset3Adapter : ListAdapter<Itemset3Item, Itemset3Adapter.ViewHolder>(DI
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Itemset3Adapter.ViewHolder {
+        val binding = ItemResultItemset3Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Itemset3Adapter.ViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: Itemset3Adapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
 
@@ -250,11 +270,14 @@ class Itemset3lAdapter : ListAdapter<Itemset3LolosItem, Itemset3lAdapter.ViewHol
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1l: Itemset3LolosItem) {
-
-//            binding.item11.text = itemset1.itemsets.toString()
-//            binding.jmlI1.text = itemset1.length.toString()
-//            binding.supI1.text = itemset1.support.toString()
+        fun bind(itemset3l: Itemset3LolosItem) {
+            with(binding) {
+                tvItem1.text
+                tvItem2.text
+                tvItem3.text
+                tvSupport.text
+                tvJumlah.text
+            }
         }
 
 
@@ -278,11 +301,13 @@ class Itemset3lAdapter : ListAdapter<Itemset3LolosItem, Itemset3lAdapter.ViewHol
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Itemset3lAdapter.ViewHolder {
+        val binding = ItemResultItemset3LBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Itemset3lAdapter.ViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: Itemset3lAdapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
     }
 }
