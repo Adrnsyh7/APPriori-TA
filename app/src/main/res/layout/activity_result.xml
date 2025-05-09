@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/resultFragment"
-    tools:context=".ui.process.ResultFragment">
+    tools:context=".ui.process.ResultActivity">
 
 
     <androidx.cardview.widget.CardView

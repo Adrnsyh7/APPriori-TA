@@ -22,6 +22,8 @@ class LoginActivity : AppCompatActivity() {
         binding = com.submission.tesapp.databinding.ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+        authManager = FirebaseLoginManager(this)
+        userSessionManager = UserSessionManager(this)
 
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()

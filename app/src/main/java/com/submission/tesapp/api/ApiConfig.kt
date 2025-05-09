@@ -12,7 +12,7 @@ import retrofit2.converter.gson.*
 
 class ApiConfig {
     companion object {
-        private const val BASE_URL_APRIORI = "https://idx-flaskk-99459457-rdiyde43ea-as.a.run.app/"
+        private const val BASE_URL_APRIORI = "https://idx-flaskk-99459457-367991773040.asia-southeast1.run.app/"
 
         fun getApiService(apiType: GateApi): ApiService {
             val baseUrl = when(apiType) {

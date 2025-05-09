@@ -1,5 +1,6 @@
 package com.submission.tesapp.ui.process
 
+import android.app.ProgressDialog
 import android.content.ClipData.Item
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +12,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import com.submission.tesapp.R
 import com.submission.tesapp.ViewModelFactory
 import com.submission.tesapp.adapter.Itemset1Adapter
@@ -28,13 +31,10 @@ import com.submission.tesapp.data.response.AprioriData
 import com.submission.tesapp.data.response.Data
 import com.submission.tesapp.databinding.FragmentProcessBinding
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 import java.util.TimeZone
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class ProcessFragment : Fragment() {
@@ -50,7 +50,7 @@ class ProcessFragment : Fragment() {
     private val binding get() = _binding!!
     private var startTimestamp: Long? = null
     private var endTimeStamp: Long? = null
-    private val db = FirebaseFirestore.getInstance()
+    private val db : FirebaseFirestore = FirebaseFirestore.getInstance()
     private val viewModel by viewModels<ProcessViewModel> {
         ViewModelFactory.getInstance()
     }
@@ -76,15 +76,52 @@ class ProcessFragment : Fragment() {
             datePicker.addOnPositiveButtonClickListener { selection ->
                 startTimestamp = selection.first
                 endTimeStamp = selection.second
-                binding.addTvDueDate.text = datePicker.headerText
+                binding.tvDate.text = datePicker.selection.toString()
             }
         }
         binding.btnProcess.setOnClickListener {
             processApriori()
         }
+
+        with(binding) {
+            rvItemset1.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset1Adapter
+            }
+            rvItemset1lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset1lAdapter
+            }
+
+            rvItemset2.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset2Adapter
+            }
+            rvItemset2lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset2lAdapter
+            }
+            rvItemset3.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset3Adapter
+            }
+            rvItemset3lolos.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemset3lAdapter
+            }
+        }
     }
 
     fun processApriori() {
+//        val text = binding.tvDate.toString()
+//        val parts = text.split("-")
+        val dataMap = mutableMapOf<String, List<String>>()
         val startTimestamp = startTimestamp
         val endTimestamp = endTimeStamp
         if (startTimestamp != null && endTimestamp !=null) {
@@ -98,51 +135,76 @@ class ProcessFragment : Fragment() {
             val start = com.google.firebase.Timestamp(startDate)
 
             val endCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"))
-            endCalendar.timeInMillis = startTimestamp
+            endCalendar.timeInMillis = endTimestamp
             endCalendar.set(Calendar.HOUR_OF_DAY, 23)
             endCalendar.set(Calendar.MINUTE, 59)
             endCalendar.set(Calendar.SECOND, 59)
             endCalendar.set(Calendar.MILLISECOND, 999)
             val endDate = endCalendar.time
             val end = com.google.firebase.Timestamp(endDate)
-
-            db.collection("transactions")
-                .whereGreaterThan("date",start)
-                .whereLessThan("date",end)
+            val support = binding.minSup.text.toString().toDouble()
+            val conf = binding.minConf.text.toString().toDouble()
+            db.collection("users").document("admin").collection("transactions")
+                .whereGreaterThanOrEqualTo("date",start)
+                .whereLessThanOrEqualTo("date", end)
                 .get()
                 .addOnSuccessListener {transactionSnapshot ->
-                    val transactionsByDate = mutableMapOf<String, MutableList<String>>()
+                    val transactionsList = mutableListOf<List<String>>();                    val dateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault()) // Contoh: 22-Januari-2024
+                    var count = 0
                     for(document in transactionSnapshot) {
-                        val date = document.getTimestamp("date")?.toDate()?.toString()
-                        val item = document.getString("obat")
-                        val support = binding.minSup.text.toString().toDouble()
-                        val conf = binding.minConf.text.toString().toDouble()
-                        if (date != null && item != null) {
-                            transactionsByDate.getOrPut(date) { mutableListOf() }.add(item)
+                        val date = document.getTimestamp("date")?.toDate()
+                        val itemRaw = document.get("item")
+                        if (date != null && itemRaw != null) {
+                            val items: List<String> = when (itemRaw) {
+                                is List<*> -> itemRaw.filterIsInstance<String>()
+                                is String -> itemRaw.split(",").map { it.trim() }
+                                else -> emptyList()
+                            }
+
+                            if (items.isNotEmpty()) {
+                                transactionsList.add(items)
+                            }
                         }
-                        val aprioriInput = AprioriData(transactionsByDate, support, conf)
+
+                        Log.d(tag, itemRaw.toString())
+                    }
+                    val myData = mapOf(
+                        "22-januari-2024" to listOf("Paracetamol", "Amoxicillin", "Losartan", "Amplodipine", "Vitamin C"),
+                        "21-januari-2024" to listOf("Paracetamol", "Vitamin C", "Aspirin", "Omeprazole"),
+                        "23-januari-2024" to listOf("Paracetamol", "Ibuprofen", "Cetirizine", "Vitamin C"),
+                        "24-januari-2024" to listOf("Ibuprofen", "Cetirizine", "Losartan", "Omeprazole")
+                    )
+
+                        val aprioriInput = AprioriData(data = transactionsList, support, conf)
+                        Log.d(tag, aprioriInput.toString())
                         viewModel.fetchApriori(aprioriInput).observe(viewLifecycleOwner) {result ->
                             when(result) {
                                 is ResultState.Loading -> {
-
+                                    isLoading(true)
                                 }
                                 is ResultState.Success -> {
+                                    Log.e(tag, result.toString())
+                                    isLoading(false)
+                                    binding.ll0.visibility = View.GONE
+                                    binding.sv.visibility = View.VISIBLE
+                                    binding.ll00.visibility = View.VISIBLE
                                     itemset1Adapter.submitList(result.data.data?.itemset1)
                                     itemset1lAdapter.submitList(result.data.data?.itemset1Lolos)
                                     itemset2Adapter.submitList(result.data.data?.itemset2)
                                     itemset2lAdapter.submitList(result.data.data?.itemset2Lolos)
                                     itemset3Adapter.submitList(result.data.data?.itemset3)
                                     itemset3lAdapter.submitList(result.data.data?.itemset3Lolos)
-                                    val intent = Intent(context, ResultFragment::class.java)
-                                    startActivity(intent)
+//                                    val intent = Intent(context, ResultActivity::class.java)
+//                                    startActivity(intent)
+
                                 }
                                 is ResultState.Error -> {
-
+                                    isLoading(false)
                                 }
                             }
 
                         }
-                    }
+
                 }
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error fetching transactions: ", e)
@@ -152,4 +214,9 @@ class ProcessFragment : Fragment() {
         }
 
     }
+    private fun isLoading(isLoading: Boolean) {
+        binding.progressBarProcess.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+
 }

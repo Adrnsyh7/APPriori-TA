@@ -36,12 +36,11 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset1: Itemset1Item) {
-            binding.tvItem.text = itemset1.itemsets.toString()
+            binding.tvItem.text = itemset1.itemsets?.joinToString(" ")
             binding.tvJumlah.text = itemset1.length.toString()
             binding.tvSupport.text = itemset1.support.toString()
             binding.tvKeterangan.text
         }
-
 
         companion object {
             val DIFF_CALLBACK1 = object : DiffUtil.ItemCallback<Itemset1Item>() {
@@ -127,8 +126,8 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset2: Itemset2Item) {
             with(binding) {
-                tvItem1.text = itemset2.itemsets.toString()
-                tvItem2.text = itemset2.itemsets.toString()
+                tvItem1.text = itemset2.itemsets1.toString()
+                tvItem2.text = itemset2.itemsets2.toString()
                 tvSupport.text = itemset2.support.toString()
                 tvKeterangan.text
             }
@@ -175,8 +174,8 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
         fun bind(itemset2l: Itemset2LolosItem) {
             with(binding) {
                 with(binding) {
-                    tvItem1.text = itemset2l.itemsets.toString()
-                    tvItem2.text = itemset2l.itemsets.toString()
+                    tvItem1.text = itemset2l.itemsets1.toString()
+                    tvItem2.text = itemset2l.itemsets2.toString()
                     tvSupport.text = itemset2l.support.toString()
 
                 }

@@ -19,7 +19,7 @@ import java.util.Calendar
 import java.util.Locale
 
 
-class InputTransactionFragment : Fragment(), DatePickerFragment.DialogDateListener {
+class InputTransactionFragment : Fragment(){
 
     private var _binding: FragmentInputBinding? = null
     private val binding get() = _binding!!
@@ -36,6 +36,12 @@ class InputTransactionFragment : Fragment(), DatePickerFragment.DialogDateListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.date.setOnClickListener {
+            val dialogFragment = DatePickerFragment()
+            dialogFragment.show(requireActivity().supportFragmentManager, "datePicker")
+        }
+
         binding.btnInput.setOnClickListener {
             saveTransactions()
         }
@@ -73,13 +79,5 @@ class InputTransactionFragment : Fragment(), DatePickerFragment.DialogDateListen
         }
     }
 
-    override fun onDialogDateSet(tag: String?, year: Int, month: Int, dayOfMonth: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, dayOfMonth)
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        binding.addDate.text = dateFormat.format(calendar.time)
-
-        dueDateMillis = dateFormat.calendar.timeInMillis
-    }
 
 }
