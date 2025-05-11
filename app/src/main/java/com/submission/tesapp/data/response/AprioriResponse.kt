@@ -135,6 +135,9 @@ data class Itemset1Item(
 	@field:SerializedName("itemsets")
 	val itemsets: List<String?>? = null,
 
+//	@field:SerializedName("itemsets")
+//	val itemsets1: String? = null,
+
 	@field:SerializedName("support")
 	val support: Double? = null
 ) : Parcelable

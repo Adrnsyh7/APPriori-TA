@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
     implementation("androidx.navigation:navigation-fragment:2.7.5")
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
 
 
 
@@ -87,6 +88,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation ("androidx.room:room-ktx:2.5.1")
+
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
 //    implementation("androidx.work:work-runtime:2.8.1")
 //    implementation("com.loopj.android:android-async-http:1.4.10")

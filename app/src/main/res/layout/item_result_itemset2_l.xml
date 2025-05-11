@@ -3,14 +3,17 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:background="@drawable/box_border">
+
 
     <TextView
         android:id="@+id/tvNo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="1"
+        android:lines="2"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="0.5" />
 
     <TextView
@@ -18,14 +21,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Paracetamol"
+        android:lines="2"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="2" />
+
     <TextView
         android:id="@+id/tvItem2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Paracetamol"
+        android:lines="2"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="2" />
 
     <TextView
@@ -34,6 +42,8 @@
         android:layout_height="wrap_content"
         android:text="23"
         android:textAlignment="center"
+        android:lines="2"
+        android:background="@drawable/box_border"
         android:layout_weight="1" />
 
     <TextView
@@ -42,6 +52,8 @@
         android:layout_height="wrap_content"
         android:text="0.5"
         android:textAlignment="center"
+        android:lines="2"
+        android:background="@drawable/box_border"
         android:layout_weight="1" />
 
 </LinearLayout>

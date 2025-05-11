@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "670130557227",
+    "firebase_url": "https://test-aja-bc88f.firebaseio.com",
+    "project_id": "test-aja-bc88f",
+    "storage_bucket": "test-aja-bc88f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670130557227:android:a6138bc5be6b63962c756e",
+        "android_client_info": {
+          "package_name": "com.submission.tesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJI2ci5_CwaF5Yxz9FySmlxXiimhOkMs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

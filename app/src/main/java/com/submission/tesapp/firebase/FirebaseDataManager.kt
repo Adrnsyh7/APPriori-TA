@@ -32,7 +32,5 @@ class FirebaseDataManager {
         }
     }
 
-    fun getTransactions(callback: (MutableList<TransactionModel>, Double, Double, Double) -> Unit ){
-        val calendar = Calendar.getInstance()
-    }
+
 }

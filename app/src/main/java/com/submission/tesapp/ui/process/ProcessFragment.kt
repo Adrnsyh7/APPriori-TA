@@ -73,10 +73,12 @@ class ProcessFragment : Fragment() {
         binding.date.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
             super.getFragmentManager()?.let { it1 -> datePicker.show(it1, "DatePicker") }
+
             datePicker.addOnPositiveButtonClickListener { selection ->
+
                 startTimestamp = selection.first
                 endTimeStamp = selection.second
-                binding.tvDate.text = datePicker.selection.toString()
+                binding.tvDate.text = datePicker.headerText
             }
         }
         binding.btnProcess.setOnClickListener {
@@ -119,9 +121,7 @@ class ProcessFragment : Fragment() {
     }
 
     fun processApriori() {
-//        val text = binding.tvDate.toString()
-//        val parts = text.split("-")
-        val dataMap = mutableMapOf<String, List<String>>()
+
         val startTimestamp = startTimestamp
         val endTimestamp = endTimeStamp
         if (startTimestamp != null && endTimestamp !=null) {
@@ -149,8 +149,7 @@ class ProcessFragment : Fragment() {
                 .whereLessThanOrEqualTo("date", end)
                 .get()
                 .addOnSuccessListener {transactionSnapshot ->
-                    val transactionsList = mutableListOf<List<String>>();                    val dateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault()) // Contoh: 22-Januari-2024
-                    var count = 0
+                    val transactionsList = mutableListOf<List<String>>();
                     for(document in transactionSnapshot) {
                         val date = document.getTimestamp("date")?.toDate()
                         val itemRaw = document.get("item")
@@ -168,12 +167,7 @@ class ProcessFragment : Fragment() {
 
                         Log.d(tag, itemRaw.toString())
                     }
-                    val myData = mapOf(
-                        "22-januari-2024" to listOf("Paracetamol", "Amoxicillin", "Losartan", "Amplodipine", "Vitamin C"),
-                        "21-januari-2024" to listOf("Paracetamol", "Vitamin C", "Aspirin", "Omeprazole"),
-                        "23-januari-2024" to listOf("Paracetamol", "Ibuprofen", "Cetirizine", "Vitamin C"),
-                        "24-januari-2024" to listOf("Ibuprofen", "Cetirizine", "Losartan", "Omeprazole")
-                    )
+
 
                         val aprioriInput = AprioriData(data = transactionsList, support, conf)
                         Log.d(tag, aprioriInput.toString())
@@ -194,9 +188,6 @@ class ProcessFragment : Fragment() {
                                     itemset2lAdapter.submitList(result.data.data?.itemset2Lolos)
                                     itemset3Adapter.submitList(result.data.data?.itemset3)
                                     itemset3lAdapter.submitList(result.data.data?.itemset3Lolos)
-//                                    val intent = Intent(context, ResultActivity::class.java)
-//                                    startActivity(intent)
-
                                 }
                                 is ResultState.Error -> {
                                     isLoading(false)

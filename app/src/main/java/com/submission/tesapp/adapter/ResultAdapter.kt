@@ -3,7 +3,6 @@ package com.submission.tesapp.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TableLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,15 +18,12 @@ import com.submission.tesapp.data.response.Itemset2Item
 import com.submission.tesapp.data.response.Itemset2LolosItem
 import com.submission.tesapp.data.response.Itemset3Item
 import com.submission.tesapp.data.response.Itemset3LolosItem
-import com.submission.tesapp.databinding.FragmentResultBinding
 import com.submission.tesapp.databinding.ItemResultBinding
 import com.submission.tesapp.databinding.ItemResultItemset1LBinding
 import com.submission.tesapp.databinding.ItemResultItemset2Binding
 import com.submission.tesapp.databinding.ItemResultItemset2LBinding
 import com.submission.tesapp.databinding.ItemResultItemset3Binding
 import com.submission.tesapp.databinding.ItemResultItemset3LBinding
-import com.submission.tesapp.databinding.ItemTransactionsBinding
-import com.submission.tesapp.ui.process.ResultFragment
 
 class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DIFF_CALLBACK1) {
     class ViewHolder(
@@ -35,7 +31,8 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1: Itemset1Item) {
+        fun bind(itemset1: Itemset1Item, position: Int) {
+            binding.tvNo.text = (position + 1).toString()
             binding.tvItem.text = itemset1.itemsets?.joinToString(" ")
             binding.tvJumlah.text = itemset1.length.toString()
             binding.tvSupport.text = itemset1.support.toString()
@@ -68,7 +65,7 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataItem = getItem(position)
-        holder.bind(dataItem)
+        holder.bind(dataItem, position)
     }
 }
 
@@ -78,11 +75,13 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemset1l: Itemset1LolosItem) {
+        fun bind(itemset1l: Itemset1LolosItem, position: Int) {
 
             with(binding) {
-                tvItem.text = itemset1l.itemsets.toString()
+                tvNo.text = (position + 1).toString()
+                tvItem.text = itemset1l.itemsets?.joinToString(" ")
                 tvSupport.text= itemset1l.support.toString()
+
             }
         }
 
@@ -114,7 +113,8 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataItem = getItem(position)
-        holder.bind(dataItem)
+        holder.bind(dataItem, position)
+
     }
 }
 
@@ -126,6 +126,7 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset2: Itemset2Item) {
             with(binding) {
+                tvNo.text = (position + 1).toString()
                 tvItem1.text = itemset2.itemsets1.toString()
                 tvItem2.text = itemset2.itemsets2.toString()
                 tvSupport.text = itemset2.support.toString()
@@ -174,6 +175,7 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
         fun bind(itemset2l: Itemset2LolosItem) {
             with(binding) {
                 with(binding) {
+                    tvNo.text = (position + 1).toString()
                     tvItem1.text = itemset2l.itemsets1.toString()
                     tvItem2.text = itemset2l.itemsets2.toString()
                     tvSupport.text = itemset2l.support.toString()

@@ -14,7 +14,9 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        >
 
         <LinearLayout
             android:id="@+id/layout_datelayout"
@@ -73,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:hint="Amount"
+                android:hint="Support"
                 tools:hint="Amount">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:hint="Amount"
+                android:hint="Confidence"
                 tools:hint="Amount">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -141,7 +143,7 @@
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -152,7 +154,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -162,9 +163,9 @@
                 android:id="@+id/cv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -192,9 +193,11 @@
                         android:id="@+id/ll2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:background="#DDDDDD"
+                        >
+<!--                        android:padding="5dp">-->
+                    <!--                        android:background="#DDDDDD"-->>
 
                         <TextView
                             android:layout_width="0dp"
@@ -202,6 +205,7 @@
                             android:layout_weight="0.5"
                             android:text="No"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -210,6 +214,7 @@
                             android:layout_weight="2"
                             android:text="Item"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -218,6 +223,7 @@
                             android:layout_weight="1"
                             android:text="Jumlah"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -226,6 +232,7 @@
                             android:layout_weight="1"
                             android:text="Support"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -234,6 +241,7 @@
                             android:layout_weight="2"
                             android:text="Keterangan"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -251,9 +259,9 @@
                 android:id="@+id/cv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -282,14 +290,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#DDDDDD"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:text="No"
+                            android:background="@drawable/box_border"
                             android:textAlignment="center"
                             android:textStyle="bold" />
 
@@ -299,6 +307,7 @@
                             android:layout_weight="2"
                             android:text="Item"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -307,6 +316,7 @@
                             android:layout_weight="1"
                             android:text="Jumlah"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
@@ -315,6 +325,7 @@
                             android:layout_weight="1"
                             android:text="Support"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
 
@@ -334,9 +345,9 @@
                 android:id="@+id/cv3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -364,14 +375,18 @@
                         android:id="@+id/ll6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:background="@drawable/box_border"
+                        >
+                        <!--                        android:padding="5dp">-->
+                        <!--                        android:background="#DDDDDD"-->>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="No"
                             android:textAlignment="center"
                             android:textStyle="bold" />
@@ -380,6 +395,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="Item"
                             android:textAlignment="center"
                             android:textStyle="bold" />
@@ -388,35 +405,43 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="Item"
                             android:textAlignment="center"
                             android:textStyle="bold" />
 
-
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/box_border"
                             android:text="Jumlah"
                             android:textAlignment="center"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/box_border"
+                            android:paddingStart="3dp"
+                            android:paddingEnd="3dp"
                             android:text="Support"
                             android:textAlignment="center"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:lines="2"
                             android:text="Keterangan"
                             android:textAlignment="center"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
-
 
                     </LinearLayout>
 
@@ -434,9 +459,9 @@
                 android:id="@+id/cv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -458,20 +483,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    >
 
                     <LinearLayout
                         android:id="@+id/ll8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:background="@drawable/box_border"
+                        >
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:background="@drawable/box_border"
                             android:text="No"
                             android:textAlignment="center"
                             android:textStyle="bold" />
@@ -480,6 +507,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
                             android:text="Item"
                             android:textAlignment="center"
                             android:textStyle="bold" />
@@ -488,6 +516,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
                             android:text="Item"
                             android:textAlignment="center"
                             android:textStyle="bold" />
@@ -496,18 +525,21 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/box_border"
                             android:text="Jumlah"
                             android:textAlignment="center"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:text="Support"
                             android:textAlignment="center"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
-
 
                     </LinearLayout>
 
@@ -525,9 +557,9 @@
                 android:id="@+id/cv5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -549,7 +581,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="16dp"
+                    >
 
                     <LinearLayout
                         android:id="@+id/ll10"
@@ -557,71 +590,77 @@
                         android:layout_height="wrap_content"
                         android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
-
+                        >
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="No"
                             android:textAlignment="center"
-                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/box_border"
                             android:text="Jumlah"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:text="Support"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Ket"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
+                            android:text="Keterangan"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
-
 
                     </LinearLayout>
 
@@ -639,9 +678,9 @@
                 android:id="@+id/cv6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -663,7 +702,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:id="@+id/ll12"
@@ -671,60 +710,65 @@
                         android:layout_height="wrap_content"
                         android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
-
+                        >
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
                             android:text="No"
                             android:textAlignment="center"
-                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="Item 1"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
+                            android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="Item 2"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
+                            android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="Item 3"
+                            android:background="@drawable/box_border"
+                            android:lines="2"
+                            android:text="Item"
                             android:textAlignment="center"
-                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/box_border"
                             android:text="Jumlah"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:textSize="14sp"
                             android:text="Support"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:background="@drawable/box_border"
                             android:textStyle="bold" />
 
 
@@ -734,7 +778,7 @@
                         android:id="@+id/rv_itemset3lolos"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        tools:listitem="@layout/item_result" />
+                        tools:listitem="@layout/item_result_itemset3_l" />
                 </LinearLayout>
 
 
@@ -744,9 +788,9 @@
                 android:id="@+id/cv7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="0dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="#fbf321"
                 app:cardCornerRadius="9dp"
@@ -776,7 +820,7 @@
                         android:layout_height="wrap_content"
                         android:background="#DDDDDD"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                       >
 
                         <TextView
                             android:layout_width="0dp"
