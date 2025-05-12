@@ -3,7 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:background="@drawable/box_border"
+    >
 
     <TextView
         android:id="@+id/tvNo"
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="1"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="0.5" />
 
     <TextView
@@ -19,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Paracetamol"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="2" />
 
     <TextView
@@ -27,6 +30,7 @@
         android:layout_height="wrap_content"
         android:text="23"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="1" />
 
     <TextView
@@ -35,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="0.5"
         android:textAlignment="center"
+        android:background="@drawable/box_border"
         android:layout_weight="1" />
 
     <TextView
@@ -42,6 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Tidak Lolos"
+        android:background="@drawable/box_border"
         android:textAlignment="center"
         android:layout_weight="2" />
 </LinearLayout>

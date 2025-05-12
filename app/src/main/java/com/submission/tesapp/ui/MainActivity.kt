@@ -1,4 +1,4 @@
-package com.submission.tesapp
+package com.submission.tesapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.submission.tesapp.R
 import com.submission.tesapp.data.preference.UserSessionManager
-import com.submission.tesapp.ui.LoginActivity
 import com.submission.tesapp.ui.transactions.InputTransactionFragment
 import com.submission.tesapp.utils.DatePickerFragment
 import java.text.SimpleDateFormat
@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener 
         val navController = findNavController(R.id.nav_host_fragment)
 
         val appBarConfiguration = AppBarConfiguration.Builder(
-        R.id.nav_dashboard,
-    R.id.nav_transactions,
-           R.id.nav_process,
-           R.id.nav_report,
+            R.id.nav_dashboard,
+            R.id.nav_transactions,
+            R.id.nav_process,
+            R.id.nav_report,
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

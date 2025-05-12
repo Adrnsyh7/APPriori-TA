@@ -1,8 +1,8 @@
 package com.submission.tesapp.api
 
 
+import com.submission.tesapp.BuildConfig
 import com.submission.tesapp.utils.GateApi
-import io.grpc.android.BuildConfig
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

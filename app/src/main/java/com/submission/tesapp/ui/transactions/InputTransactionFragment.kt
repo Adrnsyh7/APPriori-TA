@@ -6,17 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
-import com.submission.tesapp.MainActivity
-import com.submission.tesapp.R
+import com.submission.tesapp.ui.MainActivity
 import com.submission.tesapp.databinding.FragmentInputBinding
 import com.submission.tesapp.firebase.FirebaseDataManager
 import com.submission.tesapp.utils.DatePickerFragment
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 
 class InputTransactionFragment : Fragment(){

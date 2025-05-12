@@ -123,18 +123,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dont_have_an_account"
-        android:textColor="@color/blue"
-        android:backgroundTint="@android:color/transparent"
-        app:iconTint="@color/blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"/>
-
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google"
@@ -142,7 +130,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:text="@string/forgot_password"
         android:textColor="@color/blue"
         app:iconTint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
