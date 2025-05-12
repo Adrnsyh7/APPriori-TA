@@ -5,5 +5,5 @@ import java.util.Date
 
 @Parcelize
 data class TransactionModel(
-    val id: String= "", var item: String ?= null, val date: Date?= null
+    var item: String ?= null, val date: Date?= null
 ) : Parcelable

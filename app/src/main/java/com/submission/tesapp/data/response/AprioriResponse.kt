@@ -23,6 +23,15 @@ data class Itemset3LolosItem(
 	@field:SerializedName("itemsets")
 	val itemsets: List<String?>? = null,
 
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null,
+
+	@field:SerializedName("itemsets2")
+	val itemsets2: String? = null,
+
+	@field:SerializedName("itemsets3")
+	val itemsets3: String? = null,
+
 	@field:SerializedName("support")
 	val support: Double? = null
 ) : Parcelable
@@ -96,6 +105,15 @@ data class Itemset3Item(
 
 	@field:SerializedName("itemsets")
 	val itemsets: List<String?>? = null,
+
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null,
+
+	@field:SerializedName("itemsets2")
+	val itemsets2: String? = null,
+
+	@field:SerializedName("itemsets3")
+	val itemsets3: String? = null,
 
 	@field:SerializedName("support")
 	val support: Double? = null

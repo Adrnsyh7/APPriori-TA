@@ -1,18 +1,22 @@
 package com.submission.tesapp.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.RecyclerView
 import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.databinding.ItemTransactionsBinding
+import com.submission.tesapp.utils.DateConvert
 
-class TransactionAdapter(private val context: Context) : ListAdapter<TransactionModel, TransactionAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    inner class MyViewHolder(private val binding: ItemTransactionsBinding) : ViewHolder(binding.root) {
-        fun bind(userData: TransactionModel) {
+class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewHolder>(DIFF_CALLBACK) {
+   class ViewHolder(private val binding: ItemTransactionsBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(userData: TransactionModel, position: Int) {
             with(binding) {
-
+                tvNo.text = (position + 1).toString()
+                tvItem.text = userData.item
+                tvDate.text = DateConvert.convertDate(userData.date)
             }
         }
     }
@@ -23,7 +27,7 @@ class TransactionAdapter(private val context: Context) : ListAdapter<Transaction
                 oldItem: TransactionModel,
                 newItem: TransactionModel
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
 
             }
 
@@ -31,17 +35,19 @@ class TransactionAdapter(private val context: Context) : ListAdapter<Transaction
                 oldItem: TransactionModel,
                 newItem: TransactionModel
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemTransactionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TransactionAdapter.ViewHolder(binding, parent.context)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: TransactionAdapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem, position)
     }
 }

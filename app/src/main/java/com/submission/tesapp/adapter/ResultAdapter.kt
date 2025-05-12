@@ -12,12 +12,15 @@ import com.submission.tesapp.adapter.Itemset2Adapter.ViewHolder.Companion.DIFF_C
 import com.submission.tesapp.adapter.Itemset2lAdapter.ViewHolder.Companion.DIFF_CALLBACK4
 import com.submission.tesapp.adapter.Itemset3Adapter.ViewHolder.Companion.DIFF_CALLBACK5
 import com.submission.tesapp.adapter.Itemset3lAdapter.ViewHolder.Companion.DIFF_CALLBACK6
+import com.submission.tesapp.adapter.ItemsetAssocAdapter.ViewHolder.Companion.DIFF_CALLBACK7
+import com.submission.tesapp.data.response.AssociationRulesItem
 import com.submission.tesapp.data.response.Itemset1Item
 import com.submission.tesapp.data.response.Itemset1LolosItem
 import com.submission.tesapp.data.response.Itemset2Item
 import com.submission.tesapp.data.response.Itemset2LolosItem
 import com.submission.tesapp.data.response.Itemset3Item
 import com.submission.tesapp.data.response.Itemset3LolosItem
+import com.submission.tesapp.databinding.ItemResultAssocBinding
 import com.submission.tesapp.databinding.ItemResultBinding
 import com.submission.tesapp.databinding.ItemResultItemset1LBinding
 import com.submission.tesapp.databinding.ItemResultItemset2Binding
@@ -224,10 +227,11 @@ class Itemset3Adapter : ListAdapter<Itemset3Item, Itemset3Adapter.ViewHolder>(DI
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset3: Itemset3Item) {
             with(binding) {
-                tvItem1.text
-                tvItem2.text
-                tvItem3.text
-                tvSupport.text
+                tvNo.text = (position + 1).toString()
+                tvItem1.text = itemset3.itemsets1
+                tvItem2.text = itemset3.itemsets2
+                tvItem3.text = itemset3.itemsets3
+                tvSupport.text = itemset3.support.toString()
                 tvKeterangan.text
                 tvJumlah.text
             }
@@ -273,15 +277,14 @@ class Itemset3lAdapter : ListAdapter<Itemset3LolosItem, Itemset3lAdapter.ViewHol
         RecyclerView.ViewHolder(binding.root) {
         fun bind(itemset3l: Itemset3LolosItem) {
             with(binding) {
-                tvItem1.text
-                tvItem2.text
-                tvItem3.text
-                tvSupport.text
-                tvJumlah.text
+                tvNo.text = (position + 1).toString()
+                tvItem1.text = itemset3l.itemsets1
+                tvItem2.text = itemset3l.itemsets2
+                tvItem3.text = itemset3l.itemsets3
+                tvSupport.text = itemset3l.support.toString()
+
             }
         }
-
-
 
         companion object {
             val DIFF_CALLBACK6 = object : DiffUtil.ItemCallback<Itemset3LolosItem>() {
@@ -308,6 +311,54 @@ class Itemset3lAdapter : ListAdapter<Itemset3LolosItem, Itemset3lAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: Itemset3lAdapter.ViewHolder, position: Int) {
+        val dataItem = getItem(position)
+        holder.bind(dataItem)
+    }
+}
+
+class ItemsetAssocAdapter : ListAdapter<AssociationRulesItem, ItemsetAssocAdapter.ViewHolder>(DIFF_CALLBACK7) {
+    class ViewHolder(
+        private var binding: ItemResultAssocBinding,
+        private val context: Context,
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(assoc: AssociationRulesItem) {
+            with(binding) {
+                tvNo.text = (position + 1).toString()
+                tvItem.text = assoc.antecedents.toString() + "=>" + assoc.consequents.toString()
+                tvConf.text = assoc.confidence.toString()
+                tvLift.text = assoc.lift.toString()
+
+            }
+        }
+
+
+
+        companion object {
+            val DIFF_CALLBACK7 = object : DiffUtil.ItemCallback<AssociationRulesItem>() {
+                override fun areItemsTheSame(
+                    oldItem: AssociationRulesItem,
+                    newItem: AssociationRulesItem
+                ): Boolean {
+                    return oldItem.antecedents == newItem.antecedents
+                }
+
+                override fun areContentsTheSame(
+                    oldItem: AssociationRulesItem,
+                    newItem: AssociationRulesItem
+                ): Boolean {
+                    return oldItem == newItem
+                }
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsetAssocAdapter.ViewHolder {
+        val binding = ItemResultAssocBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemsetAssocAdapter.ViewHolder(binding, parent.context)
+    }
+
+    override fun onBindViewHolder(holder: ItemsetAssocAdapter.ViewHolder, position: Int) {
         val dataItem = getItem(position)
         holder.bind(dataItem)
     }

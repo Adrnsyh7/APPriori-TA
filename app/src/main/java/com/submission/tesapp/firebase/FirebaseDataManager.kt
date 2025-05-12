@@ -1,5 +1,6 @@
 package com.submission.tesapp.firebase
 
+import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,6 +32,30 @@ class FirebaseDataManager {
             callback.invoke(false)
         }
     }
+
+  fun getTransactions(callback: (MutableList<TransactionModel>) -> Unit) {
+      val userId = firebaseAuth.currentUser?.uid
+      if(userId != null) {
+          val txList: ArrayList<TransactionModel> = arrayListOf()
+          firestore.collection("users").document("admin").collection("transactions")
+              .get()
+              .addOnSuccessListener { transactionsSnapshot ->
+                  for(document in transactionsSnapshot) {
+                      val date = document.getTimestamp("date")?.toDate()
+                      val item = document.getString("item")
+                      val transaction = TransactionModel(
+                          item,
+                          date
+                      )
+                      txList.add(transaction)
+                      callback.invoke(txList)
+                  }
+              }
+              .addOnFailureListener{e ->
+                  Log.e("FirebaseTransactionManager", "Error getting transactions", e)
+              }
+      }
+  }
 
 
 }

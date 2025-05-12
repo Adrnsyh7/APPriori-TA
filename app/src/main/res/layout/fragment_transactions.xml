@@ -10,14 +10,54 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DDDDDD"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/box_border"
+                android:text="No"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/box_border"
+                android:text="Tanggal"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/box_border"
+                android:text="Item"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"/>
-
+                tools:listitem="@layout/item_transactions" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

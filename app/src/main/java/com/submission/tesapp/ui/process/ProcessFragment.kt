@@ -25,6 +25,7 @@ import com.submission.tesapp.adapter.Itemset2Adapter
 import com.submission.tesapp.adapter.Itemset2lAdapter
 import com.submission.tesapp.adapter.Itemset3Adapter
 import com.submission.tesapp.adapter.Itemset3lAdapter
+import com.submission.tesapp.adapter.ItemsetAssocAdapter
 import com.submission.tesapp.data.ResultState
 import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.data.response.AprioriData
@@ -46,6 +47,7 @@ class ProcessFragment : Fragment() {
     private lateinit var itemset2lAdapter: Itemset2lAdapter
     private lateinit var itemset3Adapter: Itemset3Adapter
     private lateinit var itemset3lAdapter: Itemset3lAdapter
+    private lateinit var itemsetAssocAdapter: ItemsetAssocAdapter
 
     private val binding get() = _binding!!
     private var startTimestamp: Long? = null
@@ -70,6 +72,8 @@ class ProcessFragment : Fragment() {
         itemset2lAdapter = Itemset2lAdapter()
         itemset3Adapter = Itemset3Adapter()
         itemset3lAdapter = Itemset3lAdapter()
+        itemsetAssocAdapter = ItemsetAssocAdapter()
+
         binding.date.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
             super.getFragmentManager()?.let { it1 -> datePicker.show(it1, "DatePicker") }
@@ -117,6 +121,11 @@ class ProcessFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = itemset3lAdapter
             }
+            rvAssoc.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = itemsetAssocAdapter
+            }
         }
     }
 
@@ -160,6 +169,7 @@ class ProcessFragment : Fragment() {
                                 else -> emptyList()
                             }
 
+
                             if (items.isNotEmpty()) {
                                 transactionsList.add(items)
                             }
@@ -188,6 +198,7 @@ class ProcessFragment : Fragment() {
                                     itemset2lAdapter.submitList(result.data.data?.itemset2Lolos)
                                     itemset3Adapter.submitList(result.data.data?.itemset3)
                                     itemset3lAdapter.submitList(result.data.data?.itemset3Lolos)
+                                    itemsetAssocAdapter.submitList(result.data.data?.associationRules)
                                 }
                                 is ResultState.Error -> {
                                     isLoading(false)
