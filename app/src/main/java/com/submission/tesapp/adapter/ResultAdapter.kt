@@ -40,10 +40,8 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
     class ViewHolder(
         private var binding: ItemResultBinding,
         private val context: Context,
-        private val db : FirebaseFirestore = FirebaseFirestore.getInstance()
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(itemset1: Itemset1Item, position: Int) {
             binding.tvNo.text = (position + 1).toString()
             binding.tvItem.text = itemset1.item?.toString()
@@ -51,20 +49,6 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
             binding.tvSupport.text = itemset1.support.toString()
             binding.tvKeterangan.text = itemset1.keterangan
 
-//            val itemset1Item = hashMapOf(
-//                "item" to itemset1.item,
-//                "keterangan" to itemset1.keterangan,
-//                "qty" to itemset1.totalQuantity,
-//                "support" to itemset1.support
-//            )
-//
-//            db.collection("users").document("admin").collection("result").document("result" + now()).collection("itemset1").add(itemset1Item)
-//                .addOnSuccessListener {
-//                    Log.d(TAG, "berhasil")
-//                }
-//                .addOnFailureListener {
-//                    it.printStackTrace()
-//                }
         }
 
         companion object {
@@ -91,7 +75,6 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
         return ViewHolder(binding, parent.context)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataItem = getItem(position)
         holder.bind(dataItem, position)
@@ -108,22 +91,6 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(itemset1l: Itemset1LolosItem, position: Int) {
-
-//            val itemset1Iteml = hashMapOf(
-//                "item" to itemset1l.item,
-//                "keterangan" to itemset1l.keterangan,
-//                "qty" to itemset1l.totalQuantity,
-//                "support" to itemset1l.support
-//            )
-//
-//            db.collection("users").document("admin").collection("result").document("result" + now()).collection("itemset1l").add(itemset1Iteml)
-//                .addOnSuccessListener {
-//                    Log.d(TAG, "berhasil")
-//                }
-//                .addOnFailureListener {
-//                    it.printStackTrace()
-//                }
-
             with(binding) {
                 tvNo.text = (position + 1).toString()
                 tvItem.text = itemset1l.item
@@ -170,28 +137,9 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
     class ViewHolder(
         private var binding: ItemResultItemset2Binding,
         private val context: Context,
-        private val db : FirebaseFirestore = FirebaseFirestore.getInstance()
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(itemset2: Itemset2Item) {
-//            val itemset2item = hashMapOf(
-//                "item" to itemset2.itemsets1,
-//                "item2" to itemset2.itemsets2,
-//                "keterangan" to itemset2.keterangan,
-//                "qty" to itemset2.count,
-//                "support" to itemset2.support
-//            )
-//
-//            db.collection("users").document("admin").collection("result").document("result" + now()).collection("itemset2").add(itemset2item)
-//                .addOnSuccessListener {
-//                    Log.d(TAG, "berhasil")
-//                }
-//                .addOnFailureListener {
-//                    it.printStackTrace()
-//                }
-
-
             with(binding) {
                 tvNo.text = (position + 1).toString()
                 tvItem1.text = itemset2.itemsets1.toString()
@@ -228,7 +176,6 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
         return Itemset2Adapter.ViewHolder(binding, parent.context)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Itemset2Adapter.ViewHolder, position: Int) {
         val dataItem = getItem(position)
         holder.bind(dataItem)
@@ -239,27 +186,10 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
     class ViewHolder(
         private var binding: ItemResultItemset2LBinding,
         private val context: Context,
-        private val db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(itemset2l: Itemset2LolosItem) {
-//            val itemset2litem = hashMapOf(
-//                "item" to itemset2l.itemsets1,
-//                "item2" to itemset2l.itemsets2,
-//                "qty" to itemset2l.count,
-//                "support" to itemset2l.support
-//            )
-//
-//            db.collection("users").document("admin").collection("result").document("result" + now()).collection("itemset2l").add(itemset2litem)
-//                .addOnSuccessListener {
-//                    Log.d(TAG, "berhasil")
-//                }
-//                .addOnFailureListener {
-//                    it.printStackTrace()
-//                }
-
             with(binding) {
                 with(binding) {
                     tvNo.text = (position + 1).toString()
