@@ -5,17 +5,17 @@ import androidx.lifecycle.liveData
 import com.submission.tesapp.api.ApiService
 import com.submission.tesapp.data.ResultState
 import com.submission.tesapp.data.response.AprioriData
-import com.submission.tesapp.data.response.AprioriResponse
+import com.submission.tesapp.data.response.AprioriResponses
 
 class AprioriRepository(private val apiService: ApiService) {
-    fun processApriori(data: AprioriData): LiveData<ResultState<AprioriResponse>> = liveData {
+    fun processApriori(data: AprioriData): LiveData<ResultState<AprioriResponses>> = liveData {
         emit(ResultState.Loading)
         try {
             val response = apiService.getApriori(data)
             if(response.isSuccessful) {
                 val aprioriResResponse = response.body()?.data
                 if(aprioriResResponse !=null) {
-                    val aprioriResponse = AprioriResponse(aprioriResResponse)
+                    val aprioriResponse = AprioriResponses(aprioriResResponse)
                     emit(ResultState.Success(aprioriResponse))
                 } else {
                     emit(ResultState.Error("Response body data is null"))

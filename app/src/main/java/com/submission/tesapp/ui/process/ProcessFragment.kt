@@ -7,13 +7,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -30,9 +33,12 @@ import com.submission.tesapp.data.ResultState
 import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.data.response.AprioriData
 import com.submission.tesapp.data.response.Data
+import com.submission.tesapp.data.response.Itemset1Item
 import com.submission.tesapp.databinding.FragmentProcessBinding
+import com.submission.tesapp.databinding.ItemResultBinding
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.LocalDate.now
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
@@ -40,6 +46,8 @@ import java.util.TimeZone
 
 class ProcessFragment : Fragment() {
     private var _binding: FragmentProcessBinding? = null
+//    private var _binding1: ItemResultBinding? = null
+//    private val binding1 get() = _binding1!!
 
     private lateinit var itemset1Adapter: Itemset1Adapter
     private lateinit var itemset1lAdapter: Itemset1lAdapter
@@ -48,6 +56,7 @@ class ProcessFragment : Fragment() {
     private lateinit var itemset3Adapter: Itemset3Adapter
     private lateinit var itemset3lAdapter: Itemset3lAdapter
     private lateinit var itemsetAssocAdapter: ItemsetAssocAdapter
+    private lateinit var itemset1Item: Itemset1Item
 
     private val binding get() = _binding!!
     private var startTimestamp: Long? = null
@@ -68,12 +77,14 @@ class ProcessFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         itemset1Adapter = Itemset1Adapter()
         itemset1lAdapter = Itemset1lAdapter()
+
         itemset2Adapter = Itemset2Adapter()
         itemset2lAdapter = Itemset2lAdapter()
         itemset3Adapter = Itemset3Adapter()
         itemset3lAdapter = Itemset3lAdapter()
         itemsetAssocAdapter = ItemsetAssocAdapter()
 
+        itemset1Item = Itemset1Item()
         binding.date.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
             super.getFragmentManager()?.let { it1 -> datePicker.show(it1, "DatePicker") }
@@ -87,6 +98,7 @@ class ProcessFragment : Fragment() {
         }
         binding.btnProcess.setOnClickListener {
             processApriori()
+            saveResult(itemset1Item)
         }
 
         with(binding) {
@@ -199,6 +211,47 @@ class ProcessFragment : Fragment() {
                                     itemset3Adapter.submitList(result.data.data?.itemset3)
                                     itemset3lAdapter.submitList(result.data.data?.itemset3Lolos)
                                     itemsetAssocAdapter.submitList(result.data.data?.associationRules)
+                                    val timestamp = System.currentTimeMillis()
+                                    val resultId = "result_${timestamp}" // dokumen unik berdasarkan waktu
+                                    val aprioriData = result.data.data ?: return@observe
+                                    val meta = hashMapOf(
+                                        "created_at" to FieldValue.serverTimestamp(),
+                                        "from" to startDate,
+                                        "end" to endDate,
+                                        "min_support" to support,
+                                        "conf" to conf,
+                                    )
+                                    db.collection("users").document("admin").collection("result").document(resultId).set(meta)
+                                    aprioriData.itemset1?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("itemset1").add(it)
+                                        }
+                                    }
+                                    aprioriData.itemset2?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("itemset2").add(it)
+                                        }
+                                    }
+                                    aprioriData.itemset2Lolos?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("itemset2lolos").add(it)
+                                        }
+                                    }
+                                    aprioriData.itemset3?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("itemset3").add(it)
+                                        }
+                                    }
+                                    aprioriData.itemset3Lolos?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("itemset3l").add(it)
+                                        }
+                                    }
+                                    aprioriData.associationRules?.forEach {
+                                        if (it != null) {
+                                            db.collection("users").document("admin").collection("result").document(resultId).collection("assoc_rules").add(it)
+                                        }
+                                    }
                                 }
                                 is ResultState.Error -> {
                                     isLoading(false)
@@ -211,9 +264,11 @@ class ProcessFragment : Fragment() {
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error fetching transactions: ", e)
                 }
-
-
         }
+    }
+
+    fun saveResult(itemset1Item: Itemset1Item){
+
 
     }
     private fun isLoading(isLoading: Boolean) {

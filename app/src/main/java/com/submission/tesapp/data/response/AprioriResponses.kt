@@ -5,35 +5,13 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class AprioriResponse(
+data class AprioriResponses(
 
 	@field:SerializedName("data")
 	val data: Data? = null,
 
 	@field:SerializedName("status")
 	val status: Status? = null
-) : Parcelable
-
-@Parcelize
-data class Itemset3LolosItem(
-
-	@field:SerializedName("length")
-	val length: Int? = null,
-
-	@field:SerializedName("itemsets")
-	val itemsets: List<String?>? = null,
-
-	@field:SerializedName("itemsets1")
-	val itemsets1: String? = null,
-
-	@field:SerializedName("itemsets2")
-	val itemsets2: String? = null,
-
-	@field:SerializedName("itemsets3")
-	val itemsets3: String? = null,
-
-	@field:SerializedName("support")
-	val support: Double? = null
 ) : Parcelable
 
 @Parcelize
@@ -58,20 +36,23 @@ data class AssociationRulesItem(
 @Parcelize
 data class Itemset2Item(
 
-	@field:SerializedName("length")
-	val length: Int? = null,
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("count")
+	val count: Int? = null,
 
 	@field:SerializedName("itemsets")
 	val itemsets: List<String?>? = null,
-
-	@field:SerializedName("itemsets1")
-	val itemsets1: String? = null,
 
 	@field:SerializedName("itemsets2")
 	val itemsets2: String? = null,
 
 	@field:SerializedName("support")
-	val support: Double? = null
+	val support: Double? = null,
+
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null
 ) : Parcelable
 
 @Parcelize
@@ -85,13 +66,60 @@ data class Status(
 ) : Parcelable
 
 @Parcelize
-data class Itemset1LolosItem(
+data class Itemset3LolosItem(
 
-	@field:SerializedName("length")
-	val length: Int? = null,
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("count")
+	val count: Int? = null,
+
+	@field:SerializedName("itemsets3")
+	val itemsets3: String? = null,
+
+	@field:SerializedName("itemsets2")
+	val itemsets2: String? = null,
+
+	@field:SerializedName("support")
+	val support: Double? = null,
+
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null
+) : Parcelable
+
+@Parcelize
+data class Itemset2LolosItem(
+
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("count")
+	val count: Int? = null,
 
 	@field:SerializedName("itemsets")
 	val itemsets: List<String?>? = null,
+
+	@field:SerializedName("itemsets2")
+	val itemsets2: String? = null,
+
+	@field:SerializedName("support")
+	val support: Double? = null,
+
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null
+) : Parcelable
+
+@Parcelize
+data class Itemset1LolosItem(
+
+	@field:SerializedName("item")
+	val item: String? = null,
+
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("total_quantity")
+	val totalQuantity: Double? = null,
 
 	@field:SerializedName("support")
 	val support: Double? = null
@@ -100,20 +128,36 @@ data class Itemset1LolosItem(
 @Parcelize
 data class Itemset3Item(
 
-	@field:SerializedName("length")
-	val length: Int? = null,
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
 
-	@field:SerializedName("itemsets")
-	val itemsets: List<String?>? = null,
+	@field:SerializedName("count")
+	val count: Int? = null,
 
-	@field:SerializedName("itemsets1")
-	val itemsets1: String? = null,
+	@field:SerializedName("itemsets3")
+	val itemsets3: String? = null,
 
 	@field:SerializedName("itemsets2")
 	val itemsets2: String? = null,
 
-	@field:SerializedName("itemsets3")
-	val itemsets3: String? = null,
+	@field:SerializedName("support")
+	val support: Double? = null,
+
+	@field:SerializedName("itemsets1")
+	val itemsets1: String? = null
+) : Parcelable
+
+@Parcelize
+data class Itemset1Item(
+
+	@field:SerializedName("item")
+	val item: String? = null,
+
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("total_quantity")
+	val totalQuantity: Double? = null,
 
 	@field:SerializedName("support")
 	val support: Double? = null
@@ -142,36 +186,4 @@ data class Data(
 
 	@field:SerializedName("itemset1")
 	val itemset1: List<Itemset1Item?>? = null
-) : Parcelable
-
-@Parcelize
-data class Itemset1Item(
-
-	@field:SerializedName("length")
-	val length: Int? = null,
-
-	@field:SerializedName("itemsets")
-	val itemsets: List<String?>? = null,
-
-//	@field:SerializedName("itemsets")
-//	val itemsets1: String? = null,
-
-	@field:SerializedName("support")
-	val support: Double? = null
-) : Parcelable
-
-@Parcelize
-data class Itemset2LolosItem(
-
-	@field:SerializedName("length")
-	val length: Int? = null,
-
-	@field:SerializedName("itemsets1")
-	val itemsets1: String? = null,
-
-	@field:SerializedName("itemsets2")
-	val itemsets2: String? = null,
-
-	@field:SerializedName("support")
-	val support: Double? = null
 ) : Parcelable

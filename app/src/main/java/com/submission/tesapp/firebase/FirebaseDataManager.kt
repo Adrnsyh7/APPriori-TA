@@ -48,6 +48,7 @@ class FirebaseDataManager {
                           date
                       )
                       txList.add(transaction)
+                      txList.sortedByDescending { it.date }
                       callback.invoke(txList)
                   }
               }
