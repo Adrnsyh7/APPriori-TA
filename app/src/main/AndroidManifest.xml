@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SaveMoney"
         tools:targetApi="31">
         <activity
+            android:name=".ui.report.ResultDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.report.ResultDetail"
+            android:exported="false" />
+        <activity
             android:name=".ui.process.ResultActivity"
             android:exported="false" />
         <activity

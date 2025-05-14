@@ -5,7 +5,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Transaction
+import com.submission.tesapp.data.model.ResultModel
 import com.submission.tesapp.data.model.TransactionModel
+import java.sql.Time
 import java.util.Calendar
 
 class FirebaseDataManager {
@@ -57,6 +59,34 @@ class FirebaseDataManager {
               }
       }
   }
+
+    fun getResult(callback: (MutableList<ResultModel>) -> Unit) {
+        val resList = mutableListOf<ResultModel>()
+        firestore.collection("users").document("admin").collection("result")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val doc1 = snapshot.toObjects(ResultModel::class.java)
+//                for(document in snapshot) {
+//                    val data = document.data
+//                    val result = ResultModel(
+//                        resultId = document.id,
+//                        created_at = data["created_at"] as? Timestamp,
+//                        from = data["from"] as? Timestamp ?,
+//                        end = data["end"] as? Timestamp,
+//                        min_support = data["min_support"] as? Double ?: 0.0,
+//                        conf = data["conf"] as? Double ?: 0.0
+//
+//                    )
+//                    resList.add(result)
+//                    resList.sortedByDescending { it.resultId}
+//                    callback.invoke(resList)
+//                }
+                callback.invoke(doc1)
+            }
+            .addOnFailureListener{e ->
+                Log.e("FirebaseTransactionManager", "Error getting transactions", e)
+            }
+    }
 
 
 }

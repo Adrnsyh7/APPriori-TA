@@ -1,8 +1,10 @@
 package com.submission.tesapp.adapter
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import com.submission.tesapp.utils.DateConvert
 
 class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewHolder>(DIFF_CALLBACK) {
    class ViewHolder(private val binding: ItemTransactionsBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(userData: TransactionModel, position: Int) {
             with(binding) {
                 tvNo.text = (position + 1).toString()
@@ -46,6 +49,7 @@ class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewH
         return TransactionAdapter.ViewHolder(binding, parent.context)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TransactionAdapter.ViewHolder, position: Int) {
         val dataItem = getItem(position)
         holder.bind(dataItem, position)

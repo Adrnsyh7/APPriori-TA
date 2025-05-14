@@ -67,6 +67,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
 
     implementation ("com.github.bumptech.glide:glide:4.13.2")
+    implementation("androidx.activity:activity:1.10.1")
 
 
     //implementation("com.google.firebase:firebase-appdistribution-gradle:5.1.1")
