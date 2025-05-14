@@ -24,6 +24,7 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
         fun bind(report: ResultModel, position: Int) {
             with(binding) {
                 tvNo.text = (position + 1).toString()
+                //tvNo.text = report.resultId
                 tvFrom.text = DateConvert.convertDate(report.from?.toDate())
                 tvTo.text = DateConvert.convertDate(report.end?.toDate())
                 tvSupp.text = report.min_support.toString()
@@ -32,7 +33,7 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
 
             itemView.setOnClickListener {
                 val intent = Intent(context, ResultDetailActivity::class.java)
-                intent.putExtra(ResultDetailActivity.resultId, report)
+                intent.putExtra(ResultDetailActivity.RESULTID, report)
                 context.startActivity(intent)
             }
         }

@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.submission.tesapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.submission.tesapp"
