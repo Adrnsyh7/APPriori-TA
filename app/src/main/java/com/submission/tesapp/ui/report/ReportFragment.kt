@@ -29,11 +29,14 @@ class ReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.cv1.visibility = View.INVISIBLE
+        binding.progressBarProcess.visibility = View.VISIBLE
         adapter = ReportAdapter()
         firebaseDataManager = FirebaseDataManager()
         val layoutManager = LinearLayoutManager(requireParentFragment().requireContext())
         binding.rvReport.layoutManager = layoutManager
         setupFirebase()
+
     }
 
     private fun setupFirebase() {
@@ -41,6 +44,8 @@ class ReportFragment : Fragment() {
             Log.e(tag, list.toString())
             binding.rvReport.setHasFixedSize(true)
             binding.rvReport.adapter = adapter
+            binding.cv1.visibility = View.VISIBLE
+            binding.progressBarProcess.visibility = View.GONE
             adapter.submitList(list)
         }
     }

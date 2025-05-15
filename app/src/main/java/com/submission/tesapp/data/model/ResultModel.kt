@@ -22,16 +22,16 @@ data class ResultModel(
 
 @Parcelize
 data class Itemset1(
-    val item: String = "",
-    val keterangan: String = "",
-    val support: Double = 0.0,
-    val totalQuantity: Double = 0.0
+    val item: String ?= "",
+    val keterangan: String ?= "",
+    val support: Double ?= 0.0,
+    val totalQuantity: Double ?= 0.0
 ) : Parcelable
 
 @Parcelize
 data class Itemset2(
-    val item1: String = "",
-    val item2: String = "",
+    val itemsets1: String = "",
+    val itemsets2: String = "",
     val keterangan: String = "",
     val support: Double = 0.0,
     val count: Double = 0.0
@@ -39,9 +39,9 @@ data class Itemset2(
 
 @Parcelize
 data class Itemset3(
-    val item1: String = "",
-    val item2: String = "",
-    val item3: String = "",
+    val itemsets1: String = "",
+    val itemsets2: String = "",
+    val itemsets3: String = "",
     val keterangan: String = "",
     val support: Double = 0.0,
     val count: Double = 0.0

@@ -3,6 +3,7 @@ package com.submission.tesapp.ui.report
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,11 +17,13 @@ import com.submission.tesapp.adapter.Itemset21Adapter
 import com.submission.tesapp.adapter.Itemset31Adapter
 import com.submission.tesapp.adapter.ItemsetAssoc1Adapter
 import com.submission.tesapp.adapter.ReportAdapter
+import com.submission.tesapp.adapter.ResultFinalAdapter
 import com.submission.tesapp.data.model.AssociationRule
 import com.submission.tesapp.data.model.Itemset1
 import com.submission.tesapp.data.model.Itemset2
 import com.submission.tesapp.data.model.Itemset3
 import com.submission.tesapp.data.model.ResultModel
+import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.databinding.ActivityLoginBinding
 import com.submission.tesapp.databinding.ActivityResultDetailBinding
 import com.submission.tesapp.databinding.FragmentReportBinding
@@ -35,41 +38,51 @@ class ResultDetailActivity : AppCompatActivity() {
     private lateinit var adapter2: Itemset21Adapter
     private lateinit var adapter3: Itemset31Adapter
     private lateinit var adapter4: ItemsetAssoc1Adapter
+    private lateinit var adapter5: ResultFinalAdapter
 
     private lateinit var firebaseDataManager: FirebaseDataManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = com.submission.tesapp.databinding.ActivityResultDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.sv.visibility = View.INVISIBLE
+        binding.progressBarProcess.visibility = View.VISIBLE
         firebaseDataManager = FirebaseDataManager()
         adapter1 = Itemset11Adapter()
         adapter2 = Itemset21Adapter()
         adapter3 = Itemset31Adapter()
         adapter4 = ItemsetAssoc1Adapter()
+        adapter5 = ResultFinalAdapter()
         val resultsModel: ResultModel? = intent.getParcelableExtra(RESULTID)
         if (resultsModel != null) {
             loadItemset(resultsModel.resultId)
         }
+
         with(binding) {
             rvItemset1.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter1 = Itemset11Adapter()
+                adapter = adapter1
             }
             rvItemset2.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter2 = Itemset21Adapter()
+                adapter = adapter2
             }
             rvItemset3.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter3 = Itemset31Adapter()
+                adapter = adapter3
             }
             rvAssoc.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter4 = ItemsetAssoc1Adapter()
+                adapter = adapter4
+            }
+            rvFinal.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = adapter5
             }
         }
     }
@@ -84,12 +97,27 @@ class ResultDetailActivity : AppCompatActivity() {
         val i2 = baseRef.collection("itemset2")
         val i3 = baseRef.collection("itemset3")
         val i4 = baseRef.collection("assoc_rules")
+        val txList: ArrayList<Itemset1> = arrayListOf()
 
         i1.get().addOnSuccessListener { snapshot1 ->
             val list = snapshot1.mapNotNull { it.toObject(Itemset1::class.java) }
-            Log.e(TAG, resultId)
-            Log.e(TAG, list.toString() )
-            adapter1.submitList(list)
+            val txList: MutableList<Itemset1> = arrayListOf()
+            for(doc in snapshot1) {
+               val item = doc.getString("item")
+               val ket = doc.getString("keterangan")
+               val sup = doc.getDouble("support")
+               val qty = doc.getDouble("totalQuantity")
+                val rsl = Itemset1(
+                   item,
+                   ket,
+                   sup,
+                   qty
+               )
+                txList.add(rsl)
+                Log.e(TAG, txList.toString())
+            }
+            adapter1.submitList(txList)
+            Log.e(TAG, adapter1.toString())
             i2.get().addOnSuccessListener { snapshot2 ->
                 val list2 = snapshot2.mapNotNull { it.toObject(Itemset2::class.java) }
                 adapter2.submitList(list2)
@@ -99,6 +127,9 @@ class ResultDetailActivity : AppCompatActivity() {
                     i4.get().addOnSuccessListener { snapshot4 ->
                         val list4 = snapshot4.mapNotNull { it.toObject(AssociationRule::class.java) }
                         adapter4.submitList(list4)
+                        adapter5.submitList(list4)
+                        binding.sv.visibility = View.VISIBLE
+                        binding.progressBarProcess.visibility = View.GONE
                     }
                 }
             }

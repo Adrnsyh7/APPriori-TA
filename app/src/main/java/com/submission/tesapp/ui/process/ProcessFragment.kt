@@ -77,13 +77,11 @@ class ProcessFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         itemset1Adapter = Itemset1Adapter()
         itemset1lAdapter = Itemset1lAdapter()
-
         itemset2Adapter = Itemset2Adapter()
         itemset2lAdapter = Itemset2lAdapter()
         itemset3Adapter = Itemset3Adapter()
         itemset3lAdapter = Itemset3lAdapter()
         itemsetAssocAdapter = ItemsetAssocAdapter()
-
         itemset1Item = Itemset1Item()
         binding.date.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()

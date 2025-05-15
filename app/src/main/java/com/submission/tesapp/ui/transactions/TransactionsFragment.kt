@@ -20,6 +20,8 @@ class TransactionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressBarProcess.visibility = View.VISIBLE
+        binding.ll2.visibility = View.INVISIBLE
         adapter = TransactionAdapter()
         firebaseDataManager = FirebaseDataManager()
         val layoutManager = LinearLayoutManager(requireParentFragment().requireContext())
@@ -39,6 +41,8 @@ class TransactionsFragment : Fragment() {
         firebaseDataManager.getTransactions { list ->
             binding.rvTx.setHasFixedSize(true)
             binding.rvTx.adapter = adapter
+            binding.progressBarProcess.visibility = View.GONE
+            binding.ll2.visibility = View.VISIBLE
             adapter.submitList(list)
         }
     }
