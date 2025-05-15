@@ -35,6 +35,44 @@ class FirebaseDataManager {
         }
     }
 
+    fun updateTransactions(id: String, item: String, date: Long, callback: (Boolean) -> Unit) {
+        val userId = firebaseAuth.currentUser?.uid
+        if(userId != null) {
+            firestore.collection("users").document("admin").collection("transactions")
+                .document(id).update(
+                    mapOf(
+                    "item" to item,
+                    "date" to Timestamp(date / 1000, 0)
+                ))
+                .addOnSuccessListener {
+                    callback.invoke(true)
+                }
+                .addOnFailureListener {
+                    callback.invoke(false)
+                    it.printStackTrace()
+                }
+        } else {
+            callback.invoke(false)
+        }
+    }
+
+    fun deleteTransactions(id: String, onComplete: (Boolean) -> Unit) {
+        firestore.collection("users").document("admin").collection("transactions")
+            .document(id).delete()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    onComplete(true)
+                } else {
+                    onComplete(false)
+                }
+            }
+
+    }
+
+    fun deleteAllTransactions(onComplete: (Boolean) -> Unit) {
+
+    }
+
   fun getTransactions(callback: (MutableList<TransactionModel>) -> Unit) {
       val userId = firebaseAuth.currentUser?.uid
       if(userId != null) {
@@ -43,9 +81,11 @@ class FirebaseDataManager {
               .get()
               .addOnSuccessListener { transactionsSnapshot ->
                   for(document in transactionsSnapshot) {
+                      val id = document.id
                       val date = document.getTimestamp("date")?.toDate()
                       val item = document.getString("item")
                       val transaction = TransactionModel(
+                          id,
                           item,
                           date
                       )

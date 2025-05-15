@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener {
+class MainActivity : AppCompatActivity(){
     private lateinit var userSessionManager: UserSessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             supportActionBar?.title = when (destination.id) {
                 R.id.nav_dashboard -> "Home"
-                R.id.nav_transactions -> "Data Transakssi"
+                R.id.nav_transactions -> "Data Transaksi"
                 R.id.nav_process -> "Proses Apriori"
                 R.id.nav_report -> "Laporan"
                 else -> "Save Money"
@@ -55,12 +55,6 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener 
         }
     }
 
-    override fun onDialogDateSet(tag: String?, year: Int, month: Int, dayOfMonth: Int) {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, dayOfMonth)
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        findViewById<TextView>(R.id.add_date).text = dateFormat.format(calendar.time)
-        InputTransactionFragment.dueDateMillis = dateFormat.calendar.timeInMillis
-    }
+
 
 }

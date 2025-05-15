@@ -13,7 +13,7 @@ object DateConvert {
     fun convertDate(currentDate: Date?) : String {
         val calendar = Calendar.getInstance()
         calendar.time = currentDate
-        val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
         return sdf.format(calendar.time)
     }
 }

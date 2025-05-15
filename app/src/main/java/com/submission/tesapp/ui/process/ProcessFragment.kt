@@ -96,7 +96,6 @@ class ProcessFragment : Fragment() {
         }
         binding.btnProcess.setOnClickListener {
             processApriori()
-            saveResult(itemset1Item)
         }
 
         with(binding) {
@@ -265,10 +264,7 @@ class ProcessFragment : Fragment() {
         }
     }
 
-    fun saveResult(itemset1Item: Itemset1Item){
 
-
-    }
     private fun isLoading(isLoading: Boolean) {
         binding.progressBarProcess.visibility = if (isLoading) View.VISIBLE else View.GONE
     }

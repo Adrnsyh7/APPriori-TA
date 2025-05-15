@@ -25,9 +25,10 @@
         android:name="com.submission.tesapp.ui.report.ReportFragment"
         android:label="Report"
         tools:layout="@layout/fragment_report" />
-    <fragment
+
+    <activity
         android:id="@+id/nav_input"
-        android:name="com.submission.tesapp.ui.transactions.InputTransactionFragment"
+        android:name="com.submission.tesapp.ui.transactions.InputTransactionsActivity"
         android:label="Input"
         tools:layout="@layout/fragment_input" />
 </navigation>

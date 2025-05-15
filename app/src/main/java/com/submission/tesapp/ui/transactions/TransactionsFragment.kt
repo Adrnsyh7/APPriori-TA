@@ -1,6 +1,8 @@
 package com.submission.tesapp.ui.transactions
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.tesapp.R
 import com.submission.tesapp.adapter.TransactionAdapter
+import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.databinding.FragmentTransactionsBinding
 import com.submission.tesapp.firebase.FirebaseDataManager
 
@@ -27,6 +30,11 @@ class TransactionsFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireParentFragment().requireContext())
         binding.rvTx.layoutManager = layoutManager
         setupFirebase()
+        binding.rvTx.setOnClickListener {
+            val intent: TransactionModel? = requireActivity().intent.getParcelableExtra(ID)
+            intent?.id
+            Log.e(TAG, intent?.id.toString())
+        }
     }
 
     override fun onCreateView(
@@ -44,10 +52,13 @@ class TransactionsFragment : Fragment() {
             binding.progressBarProcess.visibility = View.GONE
             binding.ll2.visibility = View.VISIBLE
             adapter.submitList(list)
+            if(binding.rvTx.visibility == View.VISIBLE) {
+                adapter.submitList(list)
+            }
         }
     }
 
-    companion object {
-
-    }
+ companion object {
+     const val ID = "id"
+ }
 }

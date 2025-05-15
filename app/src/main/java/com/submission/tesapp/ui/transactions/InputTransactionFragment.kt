@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.submission.tesapp.data.model.TransactionModel
 import com.submission.tesapp.ui.MainActivity
 import com.submission.tesapp.databinding.FragmentInputBinding
 import com.submission.tesapp.firebase.FirebaseDataManager
 import com.submission.tesapp.utils.DatePickerFragment
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class InputTransactionFragment : Fragment(){
@@ -38,6 +42,8 @@ class InputTransactionFragment : Fragment(){
         binding.btnInput.setOnClickListener {
             saveTransactions()
         }
+
+        editTransactions()
     }
 
     private fun saveTransactions() {
@@ -56,20 +62,38 @@ class InputTransactionFragment : Fragment(){
         }
 
     }
+    private fun editTransactions() {
+        val txId: TransactionModel? = requireActivity().intent.getParcelableExtra(ID)
+        if(txId != null) {
+            binding.addDrug.setText(txId?.item)
+            val item = binding.addDrug.text.toString()
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+            val formattedTimestamp = dateFormat.format(txId?.date ?: Date())
+            binding.addDate.setText(formattedTimestamp)
+            binding.date.setOnClickListener {
+                val dialogFragment = DatePickerFragment()
+                dialogFragment.show(requireActivity().supportFragmentManager, "datePicker")
+            }
+
+            firebaseDataManager.updateTransactions(ID, item, dueDateMillis) { success ->
+                if(success) {
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    startActivity(intent)
+                    binding.addDrug.text?.clear()
+
+                } else {
+
+                }
+            }
+        }
+
+    }
+
+
     companion object {
 
         var dueDateMillis: Long = System.currentTimeMillis()
-        private const val TRANSACTION_ID = "TRANSACTION_ID"
-
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(transactionId: String) : InputTransactionFragment {
-            val fragment = InputTransactionFragment()
-            val args = Bundle()
-            args.putString(TRANSACTION_ID, transactionId)
-            fragment.arguments = args
-            return fragment
-        }
+        const val ID = "id"
     }
 
 
