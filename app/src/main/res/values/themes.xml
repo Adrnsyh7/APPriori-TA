@@ -20,7 +20,7 @@
     <style name="Base.Theme.Auth" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:fontFamily">@font/archivo_regular</item>
+        <item name="android:fontFamily">@font/font_main</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
@@ -31,7 +31,7 @@
         <item name="colorPrimary">@color/blue_savemoney</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:fontFamily">@font/archivo_regular</item>
+        <item name="android:fontFamily">@font/font_main</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

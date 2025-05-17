@@ -37,6 +37,7 @@ import com.submission.tesapp.ui.transactions.InputTransactionFragment
 import com.submission.tesapp.ui.transactions.InputTransactionsActivity
 import com.submission.tesapp.ui.transactions.TransactionsFragment
 import com.submission.tesapp.utils.DateConvert
+import okhttp3.internal.notify
 
 class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewHolder>(DIFF_CALLBACK) {
    class ViewHolder(private val binding: ItemTransactionsBinding, private val context: Context, private val binding1: FragmentTransactionsBinding) : RecyclerView.ViewHolder(binding.root)
@@ -54,10 +55,7 @@ class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewH
                         context.startActivity(intent)
                     }
                     gambar2.setOnClickListener {
-                        val intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra(TransactionsFragment.ID, userData)
-                        context.startActivity(intent)
-                        //userData?.id?.let { it1 -> showDeleteConfirmationDialog(it1) }
+                        userData?.id?.let { it1 -> showDeleteConfirmationDialog(it1) }
                     }
 
             }

@@ -3,6 +3,7 @@ package com.submission.tesapp.ui.process
 import android.app.ProgressDialog
 import android.content.ClipData.Item
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -36,8 +38,10 @@ import com.submission.tesapp.data.response.Data
 import com.submission.tesapp.data.response.Itemset1Item
 import com.submission.tesapp.databinding.FragmentProcessBinding
 import com.submission.tesapp.databinding.ItemResultBinding
+import com.submission.tesapp.utils.DateConvert
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.time.LocalDate.now
 import java.util.Calendar
 import java.util.Locale
@@ -138,6 +142,7 @@ class ProcessFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun processApriori() {
 
         val startTimestamp = startTimestamp
@@ -198,6 +203,9 @@ class ProcessFragment : Fragment() {
                                 is ResultState.Success -> {
                                     Log.e(tag, result.toString())
                                     isLoading(false)
+                                    binding.tgl.text = DateConvert.convertDate(startDate) + " - " + DateConvert.convertDate(endDate)
+                                    binding.minSupText.text = support.toString()
+                                    binding.minConfText.text = conf.toString()
                                     binding.ll0.visibility = View.GONE
                                     binding.sv.visibility = View.VISIBLE
                                     binding.ll00.visibility = View.VISIBLE

@@ -37,16 +37,16 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <!--            android:src="@drawable/cash"/>-->
-        <!--            tools:src="@drawable/cash" />-->
+            app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/medicin"
+                    tools:src="@drawable/medicin" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:hint="Amount"
+            android:hint="Item"
             tools:hint="Amount">
 
             <com.google.android.material.textfield.TextInputEditText

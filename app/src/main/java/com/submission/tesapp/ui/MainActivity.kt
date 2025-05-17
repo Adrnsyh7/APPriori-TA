@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(){
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_dashboard,
             R.id.nav_transactions,
+            R.id.nav_transactions,
             R.id.nav_process,
             R.id.nav_report,
         ).build()
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity(){
             supportActionBar?.title = when (destination.id) {
                 R.id.nav_dashboard -> "Home"
                 R.id.nav_transactions -> "Data Transaksi"
+                R.id.nav_transactions -> "Add"
                 R.id.nav_process -> "Proses Apriori"
                 R.id.nav_report -> "Laporan"
                 else -> "Save Money"

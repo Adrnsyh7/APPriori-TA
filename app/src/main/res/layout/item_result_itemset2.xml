@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/box_border">
+    android:background="@drawable/box_borderwhite">
 
 
         <TextView
@@ -13,7 +13,7 @@
             android:text="1"
             android:lines="2"
             android:textAlignment="center"
-            android:background="@drawable/box_border"
+            android:background="@drawable/box_borderwhite"
             android:layout_weight="0.5" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:text="Paracetamol"
             android:lines="2"
             android:textAlignment="center"
-            android:background="@drawable/box_border"
+            android:background="@drawable/box_borderwhite"
             android:layout_weight="2" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:text="Paracetamol"
             android:lines="2"
             android:textAlignment="center"
-            android:background="@drawable/box_border"
+            android:background="@drawable/box_borderwhite"
             android:layout_weight="2" />
 
         <TextView
@@ -43,8 +43,8 @@
             android:text="23"
             android:textAlignment="center"
             android:lines="2"
-            android:background="@drawable/box_border"
-            android:layout_weight="1" />
+            android:background="@drawable/box_borderwhite"
+            android:layout_weight="0.7" />
 
         <TextView
             android:id="@+id/tvSupport"
@@ -53,8 +53,8 @@
             android:text="0.5"
             android:textAlignment="center"
             android:lines="2"
-            android:background="@drawable/box_border"
-            android:layout_weight="1" />
+            android:background="@drawable/box_borderwhite"
+            android:layout_weight="0.7" />
 
         <TextView
             android:id="@+id/tvKeterangan"
@@ -63,6 +63,6 @@
             android:text="Tidak Lolos"
             android:textAlignment="center"
             android:lines="2"
-            android:background="@drawable/box_border"
-            android:layout_weight="1" />
+            android:background="@drawable/box_borderwhite"
+            android:layout_weight="1.5" />
 </LinearLayout>

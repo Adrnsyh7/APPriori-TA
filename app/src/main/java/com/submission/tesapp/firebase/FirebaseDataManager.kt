@@ -76,7 +76,7 @@ class FirebaseDataManager {
   fun getTransactions(callback: (MutableList<TransactionModel>) -> Unit) {
       val userId = firebaseAuth.currentUser?.uid
       if(userId != null) {
-          val txList: ArrayList<TransactionModel> = arrayListOf()
+          val txList = mutableListOf<TransactionModel>()
           firestore.collection("users").document("admin").collection("transactions")
               .get()
               .addOnSuccessListener { transactionsSnapshot ->
@@ -90,9 +90,10 @@ class FirebaseDataManager {
                           date
                       )
                       txList.add(transaction)
-                      txList.sortedByDescending { it.date }
-                      callback.invoke(txList)
+
                   }
+                  txList.sortBy { it.date }
+                  callback.invoke(txList)
               }
               .addOnFailureListener{e ->
                   Log.e("FirebaseTransactionManager", "Error getting transactions", e)

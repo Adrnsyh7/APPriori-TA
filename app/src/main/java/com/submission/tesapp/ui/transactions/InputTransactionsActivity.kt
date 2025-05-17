@@ -29,6 +29,8 @@ class InputTransactionsActivity : AppCompatActivity(), DatePickerFragment.Dialog
         super.onCreate(savedInstanceState)
         binding = ActivityInputTransactionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         binding.date.setOnClickListener {
             val dialogFragment = DatePickerFragment()
             dialogFragment.show(supportFragmentManager,"datePicker")

@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_dashboard"
+        android:icon="@drawable/dashboard"
         android:title="Dashboard" />
     <item
         android:id="@+id/nav_transactions"
+        android:icon="@drawable/tx"
         android:title="Transaksi" />
     <item
         android:id="@+id/nav_input"
-        android:title="add"/>
+        android:icon="@drawable/add"
+        android:title="Tambah Transaksi"/>
     <item
         android:id="@+id/nav_process"
-        android:title="process" />
+        android:icon="@drawable/process"
+        android:title="Proses" />
     <item
         android:id="@+id/nav_report"
-        android:title="report" />
+        android:icon="@drawable/report"
+        android:title="Laporan" />
 </menu>

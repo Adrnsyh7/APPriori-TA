@@ -30,6 +30,12 @@ class TransactionsFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireParentFragment().requireContext())
         binding.rvTx.layoutManager = layoutManager
         setupFirebase()
+        binding.refresh.setOnRefreshListener {
+            adapter = TransactionAdapter()
+            setupFirebase()
+            binding.refresh.isRefreshing = false
+
+        }
         binding.rvTx.setOnClickListener {
             val intent: TransactionModel? = requireActivity().intent.getParcelableExtra(ID)
             intent?.id
@@ -51,9 +57,11 @@ class TransactionsFragment : Fragment() {
             binding.rvTx.adapter = adapter
             binding.progressBarProcess.visibility = View.GONE
             binding.ll2.visibility = View.VISIBLE
+//            val sorted = list.sortedByDescending { it.date }
             adapter.submitList(list)
             if(binding.rvTx.visibility == View.VISIBLE) {
                 adapter.submitList(list)
+                adapter.notifyDataSetChanged()
             }
         }
     }
