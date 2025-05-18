@@ -1,12 +1,15 @@
 package com.submission.tesapp.ui.transactions
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.submission.tesapp.R
@@ -41,6 +44,10 @@ class TransactionsFragment : Fragment() {
             intent?.id
             Log.e(TAG, intent?.id.toString())
         }
+
+        binding.deleteAll.setOnClickListener {
+            showDeleteConfirmationDialog()
+        }
     }
 
     override fun onCreateView(
@@ -51,13 +58,45 @@ class TransactionsFragment : Fragment() {
         return binding.root
     }
 
+    private fun showDeleteConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Konfirmasi")
+            .setMessage("Apakah kamu yakin akan menghapus semua transaksi?")
+            .setPositiveButton("Hapus") { _, _ ->
+                binding.progressBarProcess.visibility = View.VISIBLE
+                binding.rvTx.visibility = View.INVISIBLE
+                deleteTransaction()
+
+            }.setNegativeButton("Batal", null)
+            .show()
+    }
+
+    private fun deleteTransaction() {
+        firebaseDataManager.deleteAllTransactions { deleteSuccess ->
+            if (deleteSuccess) {
+                binding.rvTx.visibility = View.VISIBLE
+                binding.progressBarProcess.visibility = View.GONE
+                setupFirebase()
+                showToast("Transaction deleted successfully")
+            } else {
+                binding.rvTx.visibility = View.VISIBLE
+                binding.progressBarProcess.visibility = View.GONE
+                showToast("Failed to delete transaction")
+            }
+        }
+    }
+
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun setupFirebase() {
         firebaseDataManager.getTransactions { list ->
             binding.rvTx.setHasFixedSize(true)
             binding.rvTx.adapter = adapter
             binding.progressBarProcess.visibility = View.GONE
             binding.ll2.visibility = View.VISIBLE
-//            val sorted = list.sortedByDescending { it.date }
             adapter.submitList(list)
             if(binding.rvTx.visibility == View.VISIBLE) {
                 adapter.submitList(list)

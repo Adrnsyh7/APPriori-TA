@@ -330,8 +330,6 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
-                        <!--                        android:padding="5dp">-->
-                        <!--                        android:background="#DDDDDD"-->>
 
                         <TextView
                             android:layout_width="0dp"
@@ -542,8 +540,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
-                        <!--                        android:padding="5dp">-->
-                        <!--                        android:background="#DDDDDD"-->>
+
 
                         <TextView
                             android:layout_width="0dp"
@@ -847,18 +844,18 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
+                            android:layout_weight="0.9"
                             android:paddingStart="3dp"
                             android:paddingEnd="3dp"
                             android:text="Support"
                             android:textAlignment="center"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.3"
+                            android:layout_weight="1.2"
                             android:background="@drawable/box_borderblue"
                             android:lines="2"
                             android:text="Keterangan"

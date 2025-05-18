@@ -28,7 +28,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv1"
+                android:id="@+id/cv00"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -41,26 +41,151 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/box_border">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/table_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="6dp"
-                        android:text="Itemset 1"
+                        android:layout_marginTop="4dp"
+                        android:text="Data Proses"
+                        android:textStyle="bold"
                         android:textSize="18sp" />
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="Minimum Support"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="Minimum Confidence"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="Rentang Tanggal"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:id="@+id/min_sup_text"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="0.5"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/min_conf_text"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="0.5"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tgl"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_borderwhite"
+                            android:text="11/22/2022 - 11/22/2022"
+                            android:paddingStart="8dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/white"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/box_border">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/table_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Perhitungan Itemset 1"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
 
                 <LinearLayout
                     android:id="@+id/ll1"
@@ -77,8 +202,6 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
-                        <!--                        android:padding="5dp">-->
-                        <!--                        android:background="#DDDDDD"-->>
 
                         <TextView
                             android:layout_width="0dp"
@@ -111,9 +234,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@drawable/box_borderblue"
                             android:text="Support"
                             android:textAlignment="center"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -153,24 +276,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/box_border">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/table_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="6dp"
-                        android:text="Itemset 2"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="4dp"
+                        android:text="Perhitungan Itemset 2"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/ll5"
@@ -186,8 +310,6 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
-                        <!--                        android:padding="5dp">-->
-                        <!--                        android:background="#DDDDDD"-->>
 
                         <TextView
                             android:layout_width="0dp"
@@ -256,6 +378,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
+
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -285,24 +408,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/box_border">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/table_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="6dp"
-                        android:text="Itemset 3"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="4dp"
+                        android:text="Perhitungan Itemset 3"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/ll9"
@@ -318,7 +442,6 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
-
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -378,8 +501,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:background="@drawable/box_borderblue"
+                            android:layout_weight="0.9"
                             android:paddingStart="3dp"
                             android:paddingEnd="3dp"
                             android:text="Support"
@@ -390,13 +512,14 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.3"
+                            android:layout_weight="1.2"
                             android:background="@drawable/box_borderblue"
                             android:lines="2"
                             android:text="Keterangan"
                             android:textAlignment="center"
                             android:textSize="12sp"
                             android:textStyle="bold" />
+
 
                     </LinearLayout>
 
@@ -424,28 +547,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv6">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/box_border">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/table_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:text="Asosiasi Yang Terbentuk"
-                        android:textSize="18sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/ll13"
@@ -461,6 +584,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/box_borderblue"
                         android:orientation="horizontal">
+
 
                         <TextView
                             android:layout_width="0dp"
@@ -519,7 +643,6 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -540,6 +663,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="16dp"
                 android:padding="8dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
@@ -550,32 +674,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/box_border">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/table_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="6dp"
-                        android:text="Hasil"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="4dp"
+                        android:text="Hasil Analisis"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-
 
                 <LinearLayout
                 android:id="@+id/ll11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <LinearLayout
                     android:id="@+id/ll12"
@@ -592,16 +717,18 @@
                         android:lines="2"
                         android:text="No"
                         android:textAlignment="center"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1.9"
                         android:background="@drawable/box_borderblue"
                         android:lines="2"
                         android:text="Rule"
                         android:textAlignment="center"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -609,8 +736,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:background="@drawable/box_borderblue"
+                        android:paddingStart="3dp"
+                        android:paddingEnd="3dp"
                         android:text="Confidence"
                         android:textAlignment="center"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

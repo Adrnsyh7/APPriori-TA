@@ -49,14 +49,14 @@ class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewH
                 tvNo.text = (position + 1).toString()
                 tvItem.text = userData.item
                 tvDate.text = DateConvert.convertDate(userData.date)
-                    gambar.setOnClickListener {
+                gambar.setOnClickListener {
                         val intent = Intent(context, InputTransactionsActivity::class.java)
                         intent.putExtra(InputTransactionsActivity.ID, userData)
                         context.startActivity(intent)
-                    }
-                    gambar2.setOnClickListener {
+                }
+                gambar2.setOnClickListener {
                         userData?.id?.let { it1 -> showDeleteConfirmationDialog(it1) }
-                    }
+                }
 
             }
         }
