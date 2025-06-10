@@ -24,4 +24,6 @@
     <string name="cancel">Batal</string>
 
     <string name="your_web_client_id">670130557227-ghfu4blpef0rc3tgtbjtqbgv80fmmsbr.apps.googleusercontent.com</string>
+    <string name="setting">Setting</string>
+    <string name="logout">Logout</string>
 </resources>

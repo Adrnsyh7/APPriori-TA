@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Transaction
+import com.google.firebase.firestore.dataObjects
 import com.submission.tesapp.data.model.ResultModel
 import com.submission.tesapp.data.model.TransactionModel
 import java.sql.Time
@@ -70,7 +71,29 @@ class FirebaseDataManager {
     }
 
     fun deleteAllTransactions(onComplete: (Boolean) -> Unit) {
+        val tx = firestore.collection("users").document("admin").collection("transactions")
+        tx.get()
+            .addOnSuccessListener {result ->
+                for (document in result) {
+                    tx.document(document.id).delete()
+                }
+            }
+                .addOnFailureListener { e ->
+                    Log.e("FirebaseTransactionManager", "Error delete transactions", e)
+                }
+    }
 
+    fun deleteAllResult(onComplete: (Boolean) -> Unit) {
+        val rst = firestore.collection("users").document("admin").collection("result")
+        rst.get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    rst.document(document.id).delete()
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirebaseTransactionManager", "Error delete transactions", e)
+        }
     }
 
   fun getTransactions(callback: (MutableList<TransactionModel>) -> Unit) {
@@ -106,7 +129,6 @@ class FirebaseDataManager {
         firestore.collection("users").document("admin").collection("result")
             .get()
             .addOnSuccessListener { snapshot ->
-//                val doc1 = snapshot.toObjects(ResultModel::class.java)
                 for(document in snapshot) {
                     val data = document.data
                     val result = ResultModel(
@@ -116,12 +138,12 @@ class FirebaseDataManager {
                         end = data["end"] as? Timestamp,
                         min_support = data["min_support"] as? Double ?: 0.0,
                         conf = data["conf"] as? Double ?: 0.0
-
                     )
                     resList.add(result)
                     resList.sortedByDescending { it.resultId}
                     callback.invoke(resList)
                 }
+                Log.e("tes", snapshot.toString())
             }
             .addOnFailureListener{e ->
                 Log.e("FirebaseTransactionManager", "Error getting transactions", e)

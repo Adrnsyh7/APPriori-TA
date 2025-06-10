@@ -65,8 +65,6 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
         holder.bind(dataItem, position)
     }
 
-
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ResultModel>() {
             override fun areItemsTheSame(

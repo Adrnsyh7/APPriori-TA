@@ -2,6 +2,7 @@ package com.submission.tesapp.utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -15,5 +16,10 @@ object DateConvert {
         calendar.time = currentDate
         val sdf = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
         return sdf.format(calendar.time)
+    }
+    fun convertTimestamp(timestamp: Timestamp): String {
+        val date = timestamp.toDate()
+        val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        return formatter.format(date)
     }
 }

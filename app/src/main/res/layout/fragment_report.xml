@@ -41,6 +41,41 @@
                 android:text="Daftar Data Hasil"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/delete_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="9dp"
+                app:cardBackgroundColor="#FF530F"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="4dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/baseline_delete_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:text="Hapus Semua Transaksi"
+                        android:textSize="7sp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginTop="4dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
 
@@ -120,10 +155,26 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_report"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:paddingBottom="8dp"
                 tools:listitem="@layout/item_report" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:text="Tidak ada data saat ini untuk ditampilkan."/>
+
     <ProgressBar
         android:id="@+id/progressBarProcess"
         style="android:attr/progressBarStyle"
