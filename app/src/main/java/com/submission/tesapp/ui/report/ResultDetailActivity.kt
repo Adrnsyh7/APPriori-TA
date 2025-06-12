@@ -62,9 +62,12 @@ class ResultDetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Laporan Hasil Apriori")
         binding = com.submission.tesapp.databinding.ActivityResultDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.sv.visibility = View.INVISIBLE
+        binding.fabMenu.visibility = View.INVISIBLE
         binding.progressBarProcess.visibility = View.VISIBLE
         firebaseDataManager = FirebaseDataManager()
         adapter1 = Itemset11Adapter()
@@ -119,9 +122,6 @@ class ResultDetailActivity : AppCompatActivity() {
             .document("admin")
             .collection("result")
             .document(resultId)
-
-
-
         val i1 = baseRef.collection("itemset1")
         val i2 = baseRef.collection("itemset2")
         val i3 = baseRef.collection("itemset3")
@@ -169,6 +169,7 @@ class ResultDetailActivity : AppCompatActivity() {
                         adapter4.submitList(list4)
                         adapter5.submitList(list4)
                         binding.sv.visibility = View.VISIBLE
+                        binding.fabMenu.visibility = View.VISIBLE
                         binding.progressBarProcess.visibility = View.GONE
                     }
                 }
@@ -387,5 +388,8 @@ class ResultDetailActivity : AppCompatActivity() {
     companion object {
         const val RESULTID = "resultId"
     }
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
 }

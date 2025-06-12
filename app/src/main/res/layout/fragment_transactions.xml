@@ -48,39 +48,6 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cetak"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="9dp"
-                    app:cardBackgroundColor="#FF530F"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="4dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="0dp"
-                            android:src="@drawable/baseline_delete_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="0dp"
-                            android:text="cetak"
-                            android:textSize="7sp"
-                            android:layout_marginEnd="4dp"
-                            android:layout_marginTop="4dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/delete_all"
@@ -88,8 +55,9 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="9dp"
                     app:cardBackgroundColor="#FF530F"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="80dp"
                     android:layout_marginTop="4dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -207,6 +175,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cetak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/baseline_print_24"
+            android:background="@color/blue_savemoney"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

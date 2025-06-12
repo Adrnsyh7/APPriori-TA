@@ -27,6 +27,8 @@ class InputTransactionsActivity : AppCompatActivity(), DatePickerFragment.Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setTitle("Input Transaksi")
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding = ActivityInputTransactionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +37,8 @@ class InputTransactionsActivity : AppCompatActivity(), DatePickerFragment.Dialog
             val dialogFragment = DatePickerFragment()
             dialogFragment.show(supportFragmentManager,"datePicker")
         }
+        binding.addDate.setText("Tanggal")
+
 
         val txId: TransactionModel? = intent.getParcelableExtra(ID)
         binding.btnInput.setOnClickListener {
@@ -110,5 +114,8 @@ class InputTransactionsActivity : AppCompatActivity(), DatePickerFragment.Dialog
         var dueDateMillis: Long = System.currentTimeMillis()
         const val ID = "id"
     }
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
 }

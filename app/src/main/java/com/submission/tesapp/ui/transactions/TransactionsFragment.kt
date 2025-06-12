@@ -43,6 +43,7 @@ class TransactionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.progressBarProcess.visibility = View.VISIBLE
         binding.cv1.visibility = View.INVISIBLE
+        binding.cetak.visibility = View.INVISIBLE
         adapter = TransactionAdapter()
         firebaseDataManager = FirebaseDataManager()
         val layoutManager = LinearLayoutManager(requireParentFragment().requireContext())
@@ -117,8 +118,10 @@ class TransactionsFragment : Fragment() {
             if(list.isEmpty()) {
                 binding.noData.visibility = View.VISIBLE
                 binding.cv1.visibility = View.INVISIBLE
+                binding.cetak.visibility = View.INVISIBLE
             } else {
                 binding.noData.visibility = View.INVISIBLE
+                binding.cetak.visibility = View.VISIBLE
                 adapter.submitList(list)
             }
         }
@@ -143,39 +146,72 @@ class TransactionsFragment : Fragment() {
 
         val pageWidth = pageInfo.pageWidth.toFloat()
         var yPos = 50f
-
-        // ----------------------
-        // ==== HEADER DENGAN LOGO & KOP TENGAH ====
-
-// Logo di kiri
-        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, 60, 60, false)
-        canvas.drawBitmap(resizedLogo, 40f, yPos, paint)
-
-// KOP RATA TENGAH (dengan penyesuaian posisi vertikal terhadap logo)
-        val kop1 = "APOTEK MUJARAB"
-        val kop2 = "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem, Kab. Batang, Jawa Tengah, 51252"
-
-// Ukuran dan posisi teks
-        boldPaint.textSize = 16f
-        paint.textSize = 12f
-
-        val kop1Width = boldPaint.measureText(kop1)
-        val kop2Width = paint.measureText(kop2)
-
-        val textCenterX = (pageWidth - kop1Width.coerceAtLeast(kop2Width)) / 2f
+//// Logo dan posisi
+//        val logoSize = 60
+//        val logoLeft = 40f
+//        val logoTop = yPos
+//        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, logoSize, logoSize, false)
+//        canvas.drawBitmap(resizedLogo, logoLeft, logoTop, paint)
+//
+//// Teks kop
+//        val kop1 = "APOTEK MUJARAB"
+//        val kop2Lines = listOf(
+//            "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,",
+//            "Kab. Batang, Jawa Tengah, 51252"
+//        )
+//
+//// Posisi teks disesuaikan agar rata tengah vertikal terhadap logo
+//        val textX = logoLeft + logoSize + 15f
+//        val textYStart = logoTop + 15f
+//
+//        canvas.drawText(kop1, textX, textYStart, boldPaint)
+//
+//        paint.textSize = 12f
+//        for ((i, line) in kop2Lines.withIndex()) {
+//            canvas.drawText(line, textX, textYStart + 20f + (i * 15f), paint)
+//        }
+//
+//// Update yPos agar tidak tumpang tindih
+//        yPos = logoTop + logoSize + 10f
+//        canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
+//        yPos += 25f
+//// Garis pemisah
+//        canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
+//        yPos += 25f
+        val logoSize = 60
+        val logoLeft = 40f
         val logoTop = yPos
-        val textTop = yPos + 10f // geser agar sejajar tengah logo
+        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, logoSize, logoSize, false)
+        canvas.drawBitmap(resizedLogo, logoLeft, logoTop, paint)
 
-// Tulis teks tengah
-        canvas.drawText(kop1, textCenterX, textTop + 15f, boldPaint)
-        canvas.drawText(kop2, textCenterX, textTop + 33f, paint)
+        val kop1 = "APOTEK MUJARAB"
+        val kop2Lines = listOf(
+            "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,",
+            "Kab. Batang, Jawa Tengah, 51252"
+        )
 
-// Update posisi Y
-        yPos += 60f
+// Hitung tinggi total dari header text
+        val totalTextHeight = 20f + (kop2Lines.size * 15f)
+        val textStartY = logoTop + (logoSize - totalTextHeight) / 2f + 15f
 
-// Garis pemisah
+// Header Line 1 (bold) - rata tengah
+        val kop1Width = boldPaint.measureText(kop1)
+        canvas.drawText(kop1, (pageWidth - kop1Width) / 2f, textStartY, boldPaint)
+
+// Header Line 2 - tiap baris rata tengah
+        paint.textSize = 12f
+        for ((i, line) in kop2Lines.withIndex()) {
+            val lineWidth = paint.measureText(line)
+            val lineX = (pageWidth - lineWidth) / 2f
+            canvas.drawText(line, lineX, textStartY + 20f + (i * 15f), paint)
+        }
+
+// Update yPos
+        yPos = logoTop + logoSize + 10f
         canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
         yPos += 25f
+
+
 
         // ----------------------
         // Judul

@@ -31,6 +31,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="@id/username_user"
         app:layout_constraintStart_toEndOf="@id/username_user"
+        android:src="@drawable/medicin"
         app:layout_constraintTop_toBottomOf="@id/username_user" />
 
 
@@ -39,7 +40,7 @@
         android:layout_height="150dp"
         android:layout_margin="16dp"
         android:layout_marginStart="24dp"
-        app:cardBackgroundColor="#606060"
+        app:cardBackgroundColor="@color/blue_savemoney"
         app:cardCornerRadius="9dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,25 +49,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
-            android:text="Nama Usaha"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:text="Apotek Mujarab"
+            android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="8dp"
-            android:text="Alamat"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
+            android:layout_marginTop="50dp"
+            android:text="Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,
+            Kab. Batang, Jawa Tengah, 51252"
+            android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black"
-            />
+            android:textSize="16sp" />
     </com.google.android.material.card.MaterialCardView>
 
         <ProgressBar
