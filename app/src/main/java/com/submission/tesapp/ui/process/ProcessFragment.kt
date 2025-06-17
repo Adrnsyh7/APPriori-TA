@@ -11,8 +11,10 @@ import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -77,8 +79,29 @@ class ProcessFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val scrollView = activity?.findViewById<ScrollView>(R.id.sv)
+        val header = activity?.findViewById<View>(R.id.rl1)
+        val header2 =
+            activity?.findViewById<View>(R.id.rl2) // ini RelativeLayout kedua yang membungkus ScrollView
+
+        scrollView?.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _, oldScrollY: Int ->
+            if (scrollY != null) {
+                if (scrollY > 50 && oldScrollY < scrollY!!) {
+                    // Sembunyikan header (animasikan ke atas)
+                    header2?.animate()?.translationY(-header?.height?.toFloat()!!)?.setDuration(100)?.start()
+                    header2?.setBackgroundResource(R.drawable.card_flat)
+                } else if (scrollY < 50 && oldScrollY > scrollY) {
+                    // Munculkan kembali header
+                    header2?.animate()?.translationY(0f)?.setDuration(100)?.start()
+                    header2?.setBackgroundResource(R.drawable.card)
+                }
+            }
+        }
+
+
         itemset1Adapter = Itemset1Adapter()
         itemset1lAdapter = Itemset1lAdapter()
         itemset2Adapter = Itemset2Adapter()

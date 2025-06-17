@@ -27,12 +27,14 @@ class InputTransactionsActivity : AppCompatActivity(), DatePickerFragment.Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.setTitle("Input Transaksi")
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding = ActivityInputTransactionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.ivMenu.setOnClickListener {
+           onBackPressedDispatcher.onBackPressed()
+        }
         binding.date.setOnClickListener {
             val dialogFragment = DatePickerFragment()
             dialogFragment.show(supportFragmentManager,"datePicker")

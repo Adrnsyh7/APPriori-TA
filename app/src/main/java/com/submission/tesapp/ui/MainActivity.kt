@@ -54,6 +54,14 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_report -> "Laporan"
                 else -> "Save Money"
             }
+
+            supportActionBar?.hide()
+
+//            if (destination.id == R.id.nav_process) {
+//                supportActionBar?.hide()
+//            } else {
+//                supportActionBar?.show()
+//            }
         }
     }
 

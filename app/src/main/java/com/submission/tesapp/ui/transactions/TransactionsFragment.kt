@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.util.Log
@@ -178,40 +179,42 @@ class TransactionsFragment : Fragment() {
 //// Garis pemisah
 //        canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
 //        yPos += 25f
-        val logoSize = 60
+// 1. Gunakan logo asli tanpa createScaledBitmap jika tidak perlu mengecilkannya terlalu ekstrem
+        val logoTargetSize = 80f  // Ukuran ideal agar tidak terlalu besar dan tidak pecah
+        val aspectRatio = logoBitmap.width.toFloat() / logoBitmap.height
+        val logoWidth = logoTargetSize
+        val logoHeight = logoTargetSize / aspectRatio
+
         val logoLeft = 40f
         val logoTop = yPos
-        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, logoSize, logoSize, false)
-        canvas.drawBitmap(resizedLogo, logoLeft, logoTop, paint)
+
+// Gunakan RectF agar scaling lebih tajam
+        val destRect = RectF(logoLeft, logoTop, logoLeft + logoWidth, logoTop + logoHeight)
+        canvas.drawBitmap(logoBitmap, null, destRect, null)
 
         val kop1 = "APOTEK MUJARAB"
         val kop2Lines = listOf(
             "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,",
             "Kab. Batang, Jawa Tengah, 51252"
         )
+        val kop1Height = 20f
+        val kop2LineHeight = 15f
+        val totalTextHeight = kop1Height + (kop2Lines.size * kop2LineHeight)
+        val centerOfLogo = logoTop + (logoHeight / 2f)
+        val textStartY = centerOfLogo - (totalTextHeight / 2f) + kop1Height
 
-// Hitung tinggi total dari header text
-        val totalTextHeight = 20f + (kop2Lines.size * 15f)
-        val textStartY = logoTop + (logoSize - totalTextHeight) / 2f + 15f
-
-// Header Line 1 (bold) - rata tengah
         val kop1Width = boldPaint.measureText(kop1)
         canvas.drawText(kop1, (pageWidth - kop1Width) / 2f, textStartY, boldPaint)
-
-// Header Line 2 - tiap baris rata tengah
         paint.textSize = 12f
         for ((i, line) in kop2Lines.withIndex()) {
             val lineWidth = paint.measureText(line)
             val lineX = (pageWidth - lineWidth) / 2f
-            canvas.drawText(line, lineX, textStartY + 20f + (i * 15f), paint)
+            val lineY = textStartY + kop2LineHeight + (i * kop2LineHeight)
+            canvas.drawText(line, lineX, lineY, paint)
         }
-
-// Update yPos
-        yPos = logoTop + logoSize + 10f
+        yPos = maxOf(logoTop + logoHeight, textStartY + totalTextHeight) + 10f
         canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
         yPos += 25f
-
-
 
         // ----------------------
         // Judul
@@ -312,7 +315,10 @@ class TransactionsFragment : Fragment() {
     }
 
     private fun previewAndSavePdf() {
-        val logoBitmap = BitmapFactory.decodeResource(resources, R.drawable.add)
+        val assetManager = context?.assets
+        val inputStream = assetManager?.open("logo_apt_mujarab.png")
+        val logoBitmap = BitmapFactory.decodeStream(inputStream)
+
         cetakTransaksi(logoBitmap) { bytes ->
             pdfBytes = bytes
 

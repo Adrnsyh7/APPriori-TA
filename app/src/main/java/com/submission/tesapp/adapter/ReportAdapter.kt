@@ -1,8 +1,10 @@
 package com.submission.tesapp.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,12 +33,14 @@ import com.submission.tesapp.ui.report.ResultDetailActivity
 import com.submission.tesapp.utils.DateConvert
 
 class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CALLBACK) {
+    private var selectedItemId: String? = null
+
     class ViewHolder(
         private var binding: ItemReportBinding,
         private var context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(report: ResultModel, position: Int) {
+        fun bind(report: ResultModel, isSelected: Boolean) {
             with(binding) {
                 tvNo.text = (position + 1).toString()
                 //tvNo.text = report.resultId
@@ -44,13 +48,19 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
                 tvTo.text = DateConvert.convertDate(report.end?.toDate())
                 tvSupp.text = report.min_support.toString()
                 tvConf.text = report.conf.toString()
+                rootLayout.setBackgroundColor(
+                    if (isSelected) Color.parseColor("#CCE5FF") else Color.TRANSPARENT
+                )
             }
 
-            itemView.setOnClickListener {
-                val intent = Intent(context, ResultDetailActivity::class.java)
-                intent.putExtra(ResultDetailActivity.RESULTID, report)
-                context.startActivity(intent)
-            }
+
+//            itemView.setOnClickListener {
+//                val isSelected = position == selectedPosition
+//                holder.itemView.isSelected = isSelected
+//                val intent = Intent(context, ResultDetailActivity::class.java)
+//                intent.putExtra(ResultDetailActivity.RESULTID, report)
+//                context.startActivity(intent)
+//            }
         }
     }
 
@@ -60,9 +70,23 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: ReportAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReportAdapter.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val dataItem = getItem(position)
-        holder.bind(dataItem, position)
+        val isSelected = dataItem.resultId == selectedItemId // pastikan resultId adalah unik
+        holder.bind(dataItem, isSelected)
+
+
+
+        holder.itemView.setOnClickListener {
+            val oldSelectedId = selectedItemId
+            selectedItemId = dataItem.resultId
+            notifyDataSetChanged()
+
+
+            val intent = Intent(holder.itemView.context, ResultDetailActivity::class.java)
+            intent.putExtra(ResultDetailActivity.RESULTID, dataItem)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     companion object {

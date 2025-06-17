@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
@@ -64,7 +65,7 @@ class ResultDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Laporan Hasil Apriori")
-        binding = com.submission.tesapp.databinding.ActivityResultDetailBinding.inflate(layoutInflater)
+        binding = ActivityResultDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.sv.visibility = View.INVISIBLE
         binding.fabMenu.visibility = View.INVISIBLE
@@ -202,29 +203,38 @@ class ResultDetailActivity : AppCompatActivity() {
             style = Paint.Style.STROKE
             strokeWidth = 1f
         }
+        val logoTargetSize = 80f  // Ukuran ideal agar tidak terlalu besar dan tidak pecah
+        val aspectRatio = logoBitmap.width.toFloat() / logoBitmap.height
+        val logoWidth = logoTargetSize
+        val logoHeight = logoTargetSize / aspectRatio
 
-        // ==== HEADER DENGAN LOGO ====
-        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, 60, 60, false)
-        canvas.drawBitmap(resizedLogo, 40f, yPos, paint)
+        val logoLeft = 40f
+        val logoTop = yPos
 
-// ==== KOP 1 dan KOP 2 (Tengah) ====
-        boldPaint.textSize = 16f
+        val destRect = RectF(logoLeft, logoTop, logoLeft + logoWidth, logoTop + logoHeight)
+        canvas.drawBitmap(logoBitmap, null, destRect, null)
+
         val kop1 = "APOTEK MUJARAB"
-        val kop2 = "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,\nKab. Batang, Jawa Tengah, 51252"
+        val kop2Lines = listOf(
+            "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,",
+            "Kab. Batang, Jawa Tengah, 51252"
+        )
+        val kop1Height = 20f
+        val kop2LineHeight = 15f
+        val totalTextHeight = kop1Height + (kop2Lines.size * kop2LineHeight)
+        val centerOfLogo = logoTop + (logoHeight / 2f)
+        val textStartY = centerOfLogo - (totalTextHeight / 2f) + kop1Height
 
-// Hitung posisi tengah
         val kop1Width = boldPaint.measureText(kop1)
-        val kop1X = (pageWidth - kop1Width) / 2f
-        canvas.drawText(kop1, kop1X, yPos + 20f, boldPaint)
-
-// Tampilkan kop2 per baris, juga rata tengah
+        canvas.drawText(kop1, (pageWidth - kop1Width) / 2f, textStartY, boldPaint)
         paint.textSize = 12f
-        for ((i, line) in kop2.split("\n").withIndex()) {
+        for ((i, line) in kop2Lines.withIndex()) {
             val lineWidth = paint.measureText(line)
             val lineX = (pageWidth - lineWidth) / 2f
-            canvas.drawText(line, lineX, yPos + 40f + (i * 15f), paint)
+            val lineY = textStartY + kop2LineHeight + (i * kop2LineHeight)
+            canvas.drawText(line, lineX, lineY, paint)
         }
-        yPos += 80f
+        yPos = maxOf(logoTop + logoHeight, textStartY + totalTextHeight) + 10f
         canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
         yPos += 25f
 
