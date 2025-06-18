@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,10 +64,32 @@ class ResultDetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle("Laporan Hasil Apriori")
         binding = ActivityResultDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+        binding.ivMenu.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        val scrollView = findViewById<ScrollView>(R.id.sv)
+        val header = findViewById<View>(R.id.rl1)
+        val header2 =
+            findViewById<View>(R.id.rl2) // ini RelativeLayout kedua yang membungkus ScrollView
+
+        scrollView?.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _, oldScrollY: Int ->
+            if (scrollY != null) {
+                if (scrollY > 50 && oldScrollY < scrollY) {
+                    // Sembunyikan header (animasikan ke atas)
+                    header2?.animate()?.translationY(-header?.height?.toFloat()!!)?.setDuration(100)?.start()
+                    header2?.setBackgroundResource(R.drawable.card_flat)
+                } else if (scrollY < 50 && oldScrollY > scrollY) {
+                    // Munculkan kembali header
+                    header2?.animate()?.translationY(0f)?.setDuration(100)?.start()
+                    header2?.setBackgroundResource(R.drawable.card)
+                }
+            }
+        }
+
         binding.sv.visibility = View.INVISIBLE
         binding.fabMenu.visibility = View.INVISIBLE
         binding.progressBarProcess.visibility = View.VISIBLE

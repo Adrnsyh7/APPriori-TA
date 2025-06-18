@@ -28,6 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo_apt_mujarab_trnsparent"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2"/>
 <!--        app:srcCompat="" />-->
 

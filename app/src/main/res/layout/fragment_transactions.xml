@@ -207,7 +207,6 @@
             android:id="@+id/cetak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:src="@drawable/baseline_print_24"
             android:background="@color/blue_savemoney"
             android:layout_alignParentBottom="true"

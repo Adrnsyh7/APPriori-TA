@@ -2,6 +2,7 @@ package com.submission.tesapp.adapter
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.submission.tesapp.R
 import com.submission.tesapp.adapter.Itemset11Adapter.ViewHolder.Companion.DIFF_CALLBACK11
 import com.submission.tesapp.adapter.Itemset21Adapter.ViewHolder.Companion.DIFF_CALLBACK12
 import com.submission.tesapp.adapter.Itemset31Adapter.ViewHolder.Companion.DIFF_CALLBACK13
@@ -86,6 +88,10 @@ class ReportAdapter : ListAdapter<ResultModel, ReportAdapter.ViewHolder>(DIFF_CA
             val intent = Intent(holder.itemView.context, ResultDetailActivity::class.java)
             intent.putExtra(ResultDetailActivity.RESULTID, dataItem)
             holder.itemView.context.startActivity(intent)
+            if (holder.itemView.context is Activity) {
+                (holder.itemView.context as Activity).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
+            }
+//            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
         }
     }
 

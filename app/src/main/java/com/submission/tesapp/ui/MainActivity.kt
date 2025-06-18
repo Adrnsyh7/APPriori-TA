@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.navigation.navOptions
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -37,10 +38,23 @@ class MainActivity : AppCompatActivity(){
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_dashboard,
             R.id.nav_transactions,
-            R.id.nav_transactions,
+            R.id.nav_input,
             R.id.nav_process,
             R.id.nav_report,
         ).build()
+
+        navController.navigate(
+            R.id.nav_input,
+            null,
+            navOptions {
+                anim {
+                    enter = R.anim.slide_in_up
+                    exit = R.anim.slide_out_down
+                    popEnter = R.anim.slide_in_up
+                    popExit = R.anim.slide_out_down
+                }
+            }
+        )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -49,7 +63,7 @@ class MainActivity : AppCompatActivity(){
             supportActionBar?.title = when (destination.id) {
                 R.id.nav_dashboard -> "Home"
                 R.id.nav_transactions -> "Data Transaksi"
-                R.id.nav_transactions -> "Add"
+                R.id.nav_input -> "Add"
                 R.id.nav_process -> "Proses Apriori"
                 R.id.nav_report -> "Laporan"
                 else -> "Save Money"

@@ -30,5 +30,5 @@
         android:id="@+id/nav_input"
         android:name="com.submission.tesapp.ui.transactions.InputTransactionsActivity"
         android:label="Input"
-        tools:layout="@layout/fragment_input" />
+        tools:layout="@layout/fragment_input"/>
 </navigation>
