@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
@@ -205,8 +206,6 @@ class ProcessFragment : Fragment() {
                                 is String -> itemRaw.split(",").map { it.trim() }
                                 else -> emptyList()
                             }
-
-
                             if (items.isNotEmpty()) {
                                 transactionsList.add(items)
                             }
@@ -218,6 +217,7 @@ class ProcessFragment : Fragment() {
 
                         val aprioriInput = AprioriData(data = transactionsList, support, conf)
                         Log.d(tag, aprioriInput.toString())
+                        if (transactionsList.isNotEmpty()) {
                         viewModel.fetchApriori(aprioriInput).observe(viewLifecycleOwner) {result ->
                             when(result) {
                                 is ResultState.Loading -> {
@@ -280,6 +280,7 @@ class ProcessFragment : Fragment() {
                                             db.collection("users").document("admin").collection("result").document(resultId).collection("assoc_rules").add(it)
                                         }
                                     }
+
                                 }
                                 is ResultState.Error -> {
                                     isLoading(false)
@@ -287,7 +288,13 @@ class ProcessFragment : Fragment() {
                             }
 
                         }
-
+                        } else {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle("Pesan Kesalahan")
+                                .setMessage("Data tidak ditemukan pada rentang waktu tersebut.")
+                                .setNeutralButton("OK", null)
+                                .show()
+                        }
                 }
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error fetching transactions: ", e)

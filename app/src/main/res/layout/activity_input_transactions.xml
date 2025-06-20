@@ -118,8 +118,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="date"
             android:src="@drawable/date_range_24"/>
-
-
         <TextView
             android:id="@+id/add_date"
             android:layout_width="match_parent"
@@ -128,15 +126,6 @@
             android:layout_marginTop="16dp"
             tools:text="Due date" />
     </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/clock_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/date_layout"/>-->
 
     <Button
         android:id="@+id/btn_input"
@@ -149,6 +138,7 @@
         android:text="Save"
         android:layout_below="@id/date_layout"/>
 
+
     </RelativeLayout>
 <!--    <Button-->
 <!--        android:id="@+id/btn_edit"-->
@@ -160,5 +150,6 @@
 <!--        app:layout_constraintEnd_toEndOf="@id/clock_layout"-->
 <!--        app:layout_constraintStart_toStartOf="@id/clock_layout"-->
 <!--        app:layout_constraintTop_toBottomOf="@id/clock_layout" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

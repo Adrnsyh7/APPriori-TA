@@ -1,5 +1,6 @@
 package com.submission.tesapp.adapter
 
+import android.app.Activity
 import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
@@ -14,8 +15,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.submission.tesapp.R
 
 import com.submission.tesapp.data.model.AssociationRule
 import com.submission.tesapp.data.model.Itemset1
@@ -53,6 +54,9 @@ class TransactionAdapter: ListAdapter<TransactionModel, TransactionAdapter.ViewH
                         val intent = Intent(context, InputTransactionsActivity::class.java)
                         intent.putExtra(InputTransactionsActivity.ID, userData)
                         context.startActivity(intent)
+                    if (context is Activity) {
+                        context.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
+                    }
                 }
                 gambar2.setOnClickListener {
                         userData?.id?.let { it1 -> showDeleteConfirmationDialog(it1) }

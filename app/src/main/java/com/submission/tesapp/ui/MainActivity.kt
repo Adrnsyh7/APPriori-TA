@@ -43,18 +43,7 @@ class MainActivity : AppCompatActivity(){
             R.id.nav_report,
         ).build()
 
-        navController.navigate(
-            R.id.nav_input,
-            null,
-            navOptions {
-                anim {
-                    enter = R.anim.slide_in_up
-                    exit = R.anim.slide_out_down
-                    popEnter = R.anim.slide_in_up
-                    popExit = R.anim.slide_out_down
-                }
-            }
-        )
+
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -68,7 +57,6 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_report -> "Laporan"
                 else -> "Save Money"
             }
-
             supportActionBar?.hide()
 
 //            if (destination.id == R.id.nav_process) {
