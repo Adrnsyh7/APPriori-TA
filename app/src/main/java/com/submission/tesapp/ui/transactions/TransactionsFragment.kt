@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentTransaction
@@ -140,6 +143,11 @@ class TransactionsFragment : Fragment() {
             isFakeBoldText = true
             textSize = 16f
         }
+
+        val boldSmallPaint = Paint().apply {
+            isFakeBoldText = true
+            textSize = 12f
+        }
         val borderPaint = Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 1f
@@ -147,40 +155,7 @@ class TransactionsFragment : Fragment() {
 
         val pageWidth = pageInfo.pageWidth.toFloat()
         var yPos = 50f
-//// Logo dan posisi
-//        val logoSize = 60
-//        val logoLeft = 40f
-//        val logoTop = yPos
-//        val resizedLogo = Bitmap.createScaledBitmap(logoBitmap, logoSize, logoSize, false)
-//        canvas.drawBitmap(resizedLogo, logoLeft, logoTop, paint)
-//
-//// Teks kop
-//        val kop1 = "APOTEK MUJARAB"
-//        val kop2Lines = listOf(
-//            "Jl. Raya Warungasem, Kel. Warungasem, Kec. Warungasem,",
-//            "Kab. Batang, Jawa Tengah, 51252"
-//        )
-//
-//// Posisi teks disesuaikan agar rata tengah vertikal terhadap logo
-//        val textX = logoLeft + logoSize + 15f
-//        val textYStart = logoTop + 15f
-//
-//        canvas.drawText(kop1, textX, textYStart, boldPaint)
-//
-//        paint.textSize = 12f
-//        for ((i, line) in kop2Lines.withIndex()) {
-//            canvas.drawText(line, textX, textYStart + 20f + (i * 15f), paint)
-//        }
-//
-//// Update yPos agar tidak tumpang tindih
-//        yPos = logoTop + logoSize + 10f
-//        canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
-//        yPos += 25f
-//// Garis pemisah
-//        canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
-//        yPos += 25f
-// 1. Gunakan logo asli tanpa createScaledBitmap jika tidak perlu mengecilkannya terlalu ekstrem
-        val logoTargetSize = 80f  // Ukuran ideal agar tidak terlalu besar dan tidak pecah
+     val logoTargetSize = 80f  // Ukuran ideal agar tidak terlalu besar dan tidak pecah
         val aspectRatio = logoBitmap.width.toFloat() / logoBitmap.height
         val logoWidth = logoTargetSize
         val logoHeight = logoTargetSize / aspectRatio
@@ -216,90 +191,180 @@ class TransactionsFragment : Fragment() {
         canvas.drawLine(40f, yPos, pageWidth - 40f, yPos, borderPaint)
         yPos += 25f
 
-        // ----------------------
         // Judul
-        // ----------------------
         val title = "DAFTAR TRANSAKSI"
         val titleWidth = boldPaint.measureText(title)
         canvas.drawText(title, (pageWidth - titleWidth) / 2, yPos, boldPaint)
         yPos += 30f
 
-        // ----------------------
         // Tabel
-        // ----------------------
-        val startX = 40f
-        val rowHeight = 25f
-        val colWidths = listOf(40f, 200f, 250f) // Total lebar 490f
+        val noWidth = 60f
+        val dateWidth = 100f
+        val produkWidth = pageWidth - 80f - noWidth - dateWidth
+        val colWidths = listOf(noWidth, dateWidth, produkWidth)
+        val padding = 8f
+        val headers = listOf("No", "Tanggal", "Produk")
 
         // Header Kolom
+        var x = 40f
+        val headerHeight = 25f
+        for (i in headers.indices) {
+            canvas.drawRect(x, yPos, x + colWidths[i], yPos + headerHeight, borderPaint)
+            val text = headers[i]
+            val centerX = x + (colWidths[i] - boldSmallPaint.measureText(text)) / 2
+            canvas.drawText(text, centerX, yPos + 17f, boldSmallPaint)
+            x += colWidths[i]
+        }
+        yPos += headerHeight
+
+        // ================= ISI DATA =================
+        firebaseDataManager.getTransactions { list ->
+            val rows = list.mapIndexed { index, doc ->
+                listOf(
+                    (index + 1).toString(),
+                    DateConvert.convertDate(doc.date),
+                    doc.item.toString()
+                )
+            }
+
+            val maxRowHeight = rows.maxOf { row ->
+                row.mapIndexed { i, text ->
+                    calculateTextHeight(text, paint, colWidths[i] - 2 * padding)
+                }.maxOrNull() ?: 25f
+            }
+
+            for (rowData in rows) {
+                if (yPos + maxRowHeight > 720f) break
+                x = 40f
+                for (i in rowData.indices) {
+                    canvas.drawRect(x, yPos, x + colWidths[i], yPos + maxRowHeight, borderPaint)
+                    val isCenter = i == 0 || i == 1
+                    drawWrappedText(canvas, rowData[i], x + padding, yPos + paint.textSize, colWidths[i] - 2 * padding, paint, isCenter)
+                    x += colWidths[i]
+                }
+                yPos += maxRowHeight
+            }
+
+
+            val sdf = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID"))
+            val tanggalSekarang = sdf.format(Date())
+           // val marginRight = 40f
+            val bottomY = pageInfo.pageHeight - 80f  // Jarak dari bawah halaman
+            val centerX = pageWidth / 2f
+            val text1 = "Batang, $tanggalSekarang"
+            val text2 = "Disetujui oleh,"
+            val text3 = "(..............................................)"
+            val marginRight = 40f
+            val signatureX = pageWidth - 160f  // Posisi horizontal blok tanda tangan
+            val signatureY = pageInfo.pageHeight - 120f // Jarak dari bawah halaman
+
+            val drawCenter = { text: String, yOffset: Float ->
+                val textWidth = paint.measureText(text)
+                val x = signatureX + (120f - textWidth) / 2f
+                canvas.drawText(text, x, signatureY + yOffset, paint)
+            }
+
+            drawCenter(text1, 0f)
+            drawCenter(text2, 20f)
+            drawCenter(text3, 70f)
+            pdfDocument.finishPage(page)
+            val outputStream = ByteArrayOutputStream()
+            pdfDocument.writeTo(outputStream)
+            pdfDocument.close()
+            callback(outputStream.toByteArray())
+            }
+        }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun drawTransactionTable(canvas: Canvas, paint: Paint, borderPaint: Paint, yStart: Float) {
+        val startX = 40f
+        var yPos = yStart
+        val colWidths = listOf(40f, 200f, 250f)
         val headers = listOf("No", "Tanggal", "Produk")
+        val textPadding = 8f
+
+        // Header
         var x = startX
         for (i in headers.indices) {
-            canvas.drawRect(x, yPos, x + colWidths[i], yPos + rowHeight, borderPaint)
+            canvas.drawRect(x, yPos, x + colWidths[i], yPos + 25f, borderPaint)
             val text = headers[i]
             val textWidth = paint.measureText(text)
             val centerX = x + (colWidths[i] - textWidth) / 2
             canvas.drawText(text, centerX, yPos + 17f, paint)
-
             x += colWidths[i]
         }
-        yPos += rowHeight
+        yPos += 25f
 
+        // Data
         firebaseDataManager.getTransactions { list ->
-            var i = 1
+            var no = 1
             for (doc in list) {
-                if (yPos + rowHeight > 800f) break
-                x = startX
-
+                if (yPos > 800f) break
                 val rowData = listOf(
-                    i.toString(),
+                    no.toString(),
                     DateConvert.convertDate(doc.date),
-                    doc.item.toString(),
+                    doc.item.toString()
                 )
 
+                // Hitung tinggi maksimal dari setiap kolom (untuk wrap text)
+                val heights = rowData.mapIndexed { index, text ->
+                    calculateTextHeight(text, paint, colWidths[index] - 2 * textPadding)
+                }
+                val rowHeight = heights.maxOrNull() ?: 25f
+
+                x = startX
                 for (i in rowData.indices) {
                     canvas.drawRect(x, yPos, x + colWidths[i], yPos + rowHeight, borderPaint)
-                    val text = rowData[i]
-                    val textWidth = paint.measureText(text)
-                    val centerX = x + (colWidths[i] - textWidth) / 2
-                    canvas.drawText(text, centerX, yPos + 17f, paint)
+                    drawWrappedText(canvas, rowData[i], x + textPadding, yPos + paint.textSize, colWidths[i] - 2 * textPadding, paint)
                     x += colWidths[i]
                 }
 
                 yPos += rowHeight
-                i++
-            }
-
-            val sdf = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID"))
-            val tanggalSekarang = sdf.format(Date())
-
-            val text1 = "Batang, $tanggalSekarang"
-            val text2 = "(Pak Tarno)"
-
-            val text1Width = paint.measureText(text1)
-            val text2Width = paint.measureText(text2)
-
-            val marginRight = 40f
-            val posX1 = pageInfo.pageWidth - text1Width - marginRight
-            val posX2 = pageInfo.pageWidth - text2Width - marginRight
-            val posY1 = 770f
-            val posY2 = posY1 + 60f
-
-            canvas.drawText(text1, posX1, posY1, paint)
-            canvas.drawText(text2, posX2, posY2, paint)
-
-
-            pdfDocument.finishPage(page)
-
-
-            val outputStream = ByteArrayOutputStream()
-            pdfDocument.writeTo(outputStream)
-            pdfDocument.close()
-
-            callback(outputStream.toByteArray())
-
+                no++
             }
         }
+    }
+
+    // Membungkus teks agar tidak keluar dari kolom
+    fun drawWrappedText(canvas: Canvas, text: String, x: Float, y: Float, maxWidth: Float, paint: Paint, centered: Boolean = false) {
+        val words = text.split(" ")
+        var line = ""
+        var yOffset = 0f
+
+        for (word in words) {
+            val testLine = if (line.isEmpty()) word else "$line $word"
+            if (paint.measureText(testLine) > maxWidth) {
+                val drawX = if (centered) x + (maxWidth - paint.measureText(line)) / 2 else x
+                canvas.drawText(line, drawX, y + yOffset, paint)
+                line = word
+                yOffset += paint.textSize + 4f
+            } else {
+                line = testLine
+            }
+        }
+        if (line.isNotEmpty()) {
+            val drawX = if (centered) x + (maxWidth - paint.measureText(line)) / 2 else x
+            canvas.drawText(line, drawX, y + yOffset, paint)
+        }
+    }
+
+    // Menghitung tinggi teks terbungkus
+    fun calculateTextHeight(text: String, paint: Paint, maxWidth: Float): Float {
+        val words = text.split(" ")
+        var line = ""
+        var lines = 0
+        for (word in words) {
+            val testLine = if (line.isEmpty()) word else "$line $word"
+            if (paint.measureText(testLine) > maxWidth) {
+                lines++
+                line = word
+            } else {
+                line = testLine
+            }
+        }
+        if (line.isNotEmpty()) lines++
+        return lines * (paint.textSize + 4f)
+    }
+
 
  companion object {
      const val ID = "id"

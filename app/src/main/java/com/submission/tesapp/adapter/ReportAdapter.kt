@@ -125,7 +125,8 @@ class Itemset11Adapter : ListAdapter<Itemset1, Itemset11Adapter.ViewHolder>(DIFF
             binding.tvNo.text = (position + 1).toString()
             binding.tvItem.text = itemset1.item?.toString()
             binding.tvJumlah.text = itemset1.totalQuantity.toString()
-            binding.tvSupport.text = itemset1.support.toString()
+            binding.tvSupport.text = (itemset1.support?.let { Math.round(it.times(100)) }
+                ?.div(100.0)).toString()
             binding.tvKeterangan.text = itemset1.keterangan
 
         }
@@ -174,7 +175,8 @@ class Itemset21Adapter : ListAdapter<Itemset2, Itemset21Adapter.ViewHolder>(DIFF
                 tvNo.text = (position + 1).toString()
                 tvItem1.text = itemset2.itemsets1
                 tvItem2.text = itemset2.itemsets2
-                tvSupport.text= itemset2.support.toString()
+                tvSupport.text= (itemset2.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
                 tvJumlah.text = itemset2.count.toString()
                 tvKeterangan.text = itemset2.keterangan.toString()
             }
@@ -220,15 +222,16 @@ class Itemset31Adapter : ListAdapter<Itemset3, Itemset31Adapter.ViewHolder>(DIFF
         private val context: Context,
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(Itemset3: Itemset3) {
+        fun bind(itemset3: Itemset3) {
             with(binding) {
                 tvNo.text = (position + 1).toString()
-                tvItem1.text = Itemset3.itemsets1.toString()
-                tvItem2.text = Itemset3.itemsets2.toString()
-                tvItem3.text = Itemset3.itemsets3.toString()
-                tvSupport.text = Itemset3.support.toString()
-                tvKeterangan.text = Itemset3.keterangan.toString()
-                tvJumlah.text = Itemset3.count.toString()
+                tvItem1.text = itemset3.itemsets1.toString()
+                tvItem2.text = itemset3.itemsets2.toString()
+                tvItem3.text = itemset3.itemsets3.toString()
+                tvSupport.text = (itemset3.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
+                tvKeterangan.text = itemset3.keterangan.toString()
+                tvJumlah.text = itemset3.count.toString()
             }
         }
 
@@ -278,7 +281,8 @@ class ItemsetAssoc1Adapter : ListAdapter<AssociationRule, ItemsetAssoc1Adapter.V
                     tvNo.text = (position + 1).toString()
                     tvItem.text = itemsetassoc.antecedents.joinToString("") + "=>" + itemsetassoc.consequents.joinToString("")
                     tvLift.text = itemsetassoc.lift.toString()
-                    tvConf.text = itemsetassoc.confidence.toString()
+                    tvConf.text = (itemsetassoc.confidence?.let { Math.round(it.times(100)) }
+                        ?.div(100.0)).toString()
 
                     if(itemsetassoc.lift!! >= 1) {
                         tvKeterangan.text = "Korelasi Positif"
@@ -335,7 +339,8 @@ class ResultFinalAdapter : ListAdapter<AssociationRule, ResultFinalAdapter.ViewH
                 tvNo.text = (position + 1).toString()
                 tvItem.text = "Jika konsumen membeli " + itemsetassoc.antecedents.joinToString("") + ", maka konsumen juga akan membeli " +
                         itemsetassoc.consequents.joinToString("")
-                tvConf.text = itemsetassoc.confidence.toString()
+                tvConf.text = (itemsetassoc.confidence?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
 
             }
         }

@@ -222,6 +222,11 @@ class ResultDetailActivity : AppCompatActivity() {
             textSize = 16f
             isFakeBoldText = true
         }
+
+        val boldSmallPaint = Paint().apply {
+            isFakeBoldText = true
+            textSize = 12f
+        }
         val borderPaint = Paint().apply {
             style = Paint.Style.STROKE
             strokeWidth = 1f
@@ -277,8 +282,8 @@ class ResultDetailActivity : AppCompatActivity() {
         var x = startX
         for (i in headers1.indices) {
             canvas.drawRect(x, yPos, x + colWidths1[i], yPos + rowHeight, borderPaint)
-            val center = x + (colWidths1[i] - paint.measureText(headers1[i])) / 2
-            canvas.drawText(headers1[i], center, yPos + 17f, paint)
+            val center = x + (colWidths1[i] - boldSmallPaint.measureText(headers1[i])) / 2
+            canvas.drawText(headers1[i], center, yPos + 17f, boldSmallPaint)
             x += colWidths1[i]
         }
         yPos += rowHeight
@@ -368,18 +373,21 @@ class ResultDetailActivity : AppCompatActivity() {
                 val tanggalSekarang = sdf.format(Date())
 
                 val text1 = "Batang, $tanggalSekarang"
-                val text2 = "(Pak Tarno)"
-                val text1Width = paint.measureText(text1)
-                val text2Width = paint.measureText(text2)
-
+                val text2 = "Disetujui oleh,"
+                val text3 = "(..............................................)"
                 val marginRight = 40f
-                val posX1 = pageInfo.pageWidth - text1Width - marginRight
-                val posX2 = pageInfo.pageWidth - text2Width - marginRight
-                val posY1 = 770f
-                val posY2 = posY1 + 60f
-                canvas.drawText(text1, posX1, posY1, paint)
-                canvas.drawText(text2, posX2, posY2, paint)
+                val signatureX = pageWidth - 160f  // Posisi horizontal blok tanda tangan
+                val signatureY = pageInfo.pageHeight - 120f // Jarak dari bawah halaman
 
+                val drawCenter = { text: String, yOffset: Float ->
+                    val textWidth = paint.measureText(text)
+                    val x = signatureX + (120f - textWidth) / 2f
+                    canvas.drawText(text, x, signatureY + yOffset, paint)
+                }
+
+                drawCenter(text1, 0f)
+                drawCenter(text2, 20f)
+                drawCenter(text3, 70f)
                 // Selesai menggambar, simpan halaman & kirim kembali ke callback
                 pdfDocument.finishPage(page)
                 val outputStream = ByteArrayOutputStream()
@@ -393,7 +401,9 @@ class ResultDetailActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun previewAndSavePdf(resultId: String) {
-        val logoBitmap = BitmapFactory.decodeResource(resources, R.drawable.add)
+        val assetManager = applicationContext?.assets
+        val inputStream = assetManager?.open("logo_apt_mujarab.png")
+        val logoBitmap = BitmapFactory.decodeStream(inputStream)
         cetakTransaksi(logoBitmap, resultId) { bytes ->
             pdfBytes = bytes
 

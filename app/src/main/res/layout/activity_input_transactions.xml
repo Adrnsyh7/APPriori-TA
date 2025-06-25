@@ -33,11 +33,11 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="48dp"
             android:layout_marginRight="48dp"
-            android:layout_centerVertical="true"
             android:fontFamily="@font/plusjktsans"
-            android:text="Input Transaksi"
+            android:text="Masukan Transaksi"
             android:textColor="@color/white"
             android:textSize="20dp" />
 

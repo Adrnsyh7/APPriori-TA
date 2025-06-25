@@ -1,5 +1,6 @@
 package com.submission.tesapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
@@ -42,11 +43,13 @@ class Itemset1Adapter : ListAdapter<Itemset1Item, Itemset1Adapter.ViewHolder>(DI
         private val context: Context,
     ) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("DefaultLocale")
         fun bind(itemset1: Itemset1Item, position: Int) {
             binding.tvNo.text = (position + 1).toString()
             binding.tvItem.text = itemset1.item?.toString()
             binding.tvJumlah.text = itemset1.totalQuantity.toString()
-            binding.tvSupport.text = itemset1.support.toString()
+            binding.tvSupport.text = (itemset1.support?.let { Math.round(it.times(100)) }
+                ?.div(100.0)).toString()
             binding.tvKeterangan.text = itemset1.keterangan
 
         }
@@ -94,7 +97,8 @@ class Itemset1lAdapter : ListAdapter<Itemset1LolosItem, Itemset1lAdapter.ViewHol
             with(binding) {
                 tvNo.text = (position + 1).toString()
                 tvItem.text = itemset1l.item
-                tvSupport.text= itemset1l.support.toString()
+                tvSupport.text= (itemset1l.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
                 tvJumlah.text = itemset1l.totalQuantity.toString()
             }
         }
@@ -144,7 +148,8 @@ class Itemset2Adapter : ListAdapter<Itemset2Item, Itemset2Adapter.ViewHolder>(DI
                 tvNo.text = (position + 1).toString()
                 tvItem1.text = itemset2.itemsets1.toString()
                 tvItem2.text = itemset2.itemsets2.toString()
-                tvSupport.text = itemset2.support.toString()
+                tvSupport.text = (itemset2.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
                 tvKeterangan.text = itemset2.keterangan.toString()
                 tvJumlah.text = itemset2.count.toString()
             }
@@ -195,7 +200,8 @@ class Itemset2lAdapter : ListAdapter<Itemset2LolosItem, Itemset2lAdapter.ViewHol
                     tvNo.text = (position + 1).toString()
                     tvItem1.text = itemset2l.itemsets1.toString()
                     tvItem2.text = itemset2l.itemsets2.toString()
-                    tvSupport.text = itemset2l.support.toString()
+                    tvSupport.text = (itemset2l.support?.let { Math.round(it.times(100)) }
+                        ?.div(100.0)).toString()
                     tvJumlah.text = itemset2l.count.toString()
                 }
             }
@@ -246,7 +252,8 @@ class Itemset3Adapter : ListAdapter<Itemset3Item, Itemset3Adapter.ViewHolder>(DI
                 tvItem1.text = itemset3.itemsets1
                 tvItem2.text = itemset3.itemsets2
                 tvItem3.text = itemset3.itemsets3
-                tvSupport.text = itemset3.support.toString()
+                tvSupport.text = (itemset3.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
                 tvKeterangan.text = itemset3.keterangan.toString()
                 tvJumlah.text = itemset3.count.toString()
             }
@@ -296,7 +303,8 @@ class Itemset3lAdapter : ListAdapter<Itemset3LolosItem, Itemset3lAdapter.ViewHol
                 tvItem1.text = itemset3l.itemsets1
                 tvItem2.text = itemset3l.itemsets2
                 tvItem3.text = itemset3l.itemsets3
-                tvSupport.text = itemset3l.support.toString()
+                tvSupport.text = (itemset3l.support?.let { Math.round(it.times(100)) }
+                    ?.div(100.0)).toString()
                 tvJumlah.text = itemset3l.count.toString()
             }
         }

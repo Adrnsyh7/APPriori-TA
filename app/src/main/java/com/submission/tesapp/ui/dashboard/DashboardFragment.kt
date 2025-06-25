@@ -73,37 +73,7 @@ class DashboardFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
-    @Deprecated("Deprecated in Java")
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.app_dashboard_menu, menu)
-//        return super.onCreateOptionsMenu(menu,inflater)
-//    }
-//
-//    @Deprecated("Deprecated in Java")
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//
-//            R.id.menu_profile -> {
-//                Toast.makeText(requireActivity(), "Profile Menu Clicked", Toast.LENGTH_SHORT).show()
-//                true
-//            }
-//
-////            R.id.setting -> {
-////                val intent = Intent(requireActivity(), SettingsActivity::class.java)
-////                startActivity(intent)
-////                true
-////            }
-//
-//            R.id.logout -> {
-//                userSessionManager.logoutUser()
-//                val intent = Intent(requireActivity(), LoginActivity::class.java)
-//                startActivity(intent)
-//                true
-//            }
-//
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+
 
     companion object {
     }
