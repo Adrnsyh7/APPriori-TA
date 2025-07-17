@@ -13,23 +13,30 @@
         android:theme="@style/Theme.SaveMoney"
         tools:targetApi="31">
         <activity
+            android:name=".ui.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Auth" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.transactions.InputTransactionsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.report.ResultDetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
@@ -41,7 +48,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
     </application>
 
 </manifest>
