@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.submission.tesapp"
+    namespace = "com.submission.appriori"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.submission.tesapp"
+        applicationId = "com.submission.appriori"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
         buildConfig = true
     }
 }
@@ -53,7 +54,12 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
     implementation("androidx.navigation:navigation-fragment:2.7.5")
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
-
+//    val hilt_version = "2.33-beta"
+//    val hilt_android_version = "1.0.0-alpha03"
+//    implementation ("com.google.dagger:hilt-android:$hilt_version")
+//    kapt ("com.google.dagger:hilt-android-compiler:$hilt_version")
+//    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:$hilt_android_version")
+//    kapt ("androidx.hilt:hilt-compiler:$hilt_android_version")
 
 
    implementation("com.google.firebase:firebase-firestore:24.10.0")
@@ -68,6 +74,9 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.13.2")
     implementation("androidx.activity:activity:1.10.1")
+    implementation("androidx.paging:paging-common-android:3.3.6")
+    implementation("androidx.paging:paging-runtime-ktx:3.3.6")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.5")
 
 
     //implementation("com.google.firebase:firebase-appdistribution-gradle:5.1.1")
@@ -98,7 +107,11 @@ dependencies {
 //    implementation("androidx.work:work-runtime:2.8.1")
 //    implementation("com.loopj.android:android-async-http:1.4.10")
 //
-
+//    implementation(libs.firebase.auth)
+//
+//    implementation(libs.androidx.credentials)
+//    implementation(libs.androidx.credentials.play.services.auth)
+//    implementation(libs.googleid)
 
     implementation ("com.google.android.material:material:1.0.0")
 

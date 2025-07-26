@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TesApp"
+rootProject.name = "Appriori"
 include(":app")
  

@@ -7,28 +7,28 @@
 
     <fragment
         android:id="@+id/nav_dashboard"
-        android:name="com.submission.tesapp.ui.dashboard.DashboardFragment"
+        android:name="com.submission.appriori.ui.dashboard.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/nav_transactions"
-        android:name="com.submission.tesapp.ui.transactions.TransactionsFragment"
+        android:name="com.submission.appriori.ui.transactions.TransactionsFragment"
         android:label="Transactions"
         tools:layout="@layout/fragment_transactions" />
     <fragment
         android:id="@+id/nav_process"
-        android:name="com.submission.tesapp.ui.process.ProcessFragment"
+        android:name="com.submission.appriori.ui.process.ProcessFragment"
         android:label="Process"
         tools:layout="@layout/fragment_process" />
     <fragment
         android:id="@+id/nav_report"
-        android:name="com.submission.tesapp.ui.report.ReportFragment"
+        android:name="com.submission.appriori.ui.report.ReportFragment"
         android:label="Report"
         tools:layout="@layout/fragment_report" />
 
     <activity
         android:id="@+id/nav_input"
-        android:name="com.submission.tesapp.ui.transactions.InputTransactionsActivity"
+        android:name="com.submission.appriori.ui.transactions.InputTransactionsActivity"
         android:label="Input"
         tools:layout="@layout/fragment_input"/>
 </navigation>

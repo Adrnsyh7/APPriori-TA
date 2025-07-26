@@ -8,8 +8,8 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.submission.tesapp" />
-                  <option name="mobileSdkAppId" value="1:670130557227:android:a6138bc5be6b63962c756e" />
+                  <option name="appId" value="com.submission.appriori" />
+                  <option name="mobileSdkAppId" value="1:670130557227:android:9985513b2aa2e3ed2c756e" />
                   <option name="projectId" value="test-aja-bc88f" />
                   <option name="projectNumber" value="670130557227" />
                 </ConnectionSetting>

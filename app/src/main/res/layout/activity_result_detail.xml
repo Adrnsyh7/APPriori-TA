@@ -783,6 +783,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.3"
                                 android:background="@drawable/box_borderblue"
+                                android:lines="2"
                                 android:paddingStart="3dp"
                                 android:paddingEnd="3dp"
                                 android:text="Confidence"

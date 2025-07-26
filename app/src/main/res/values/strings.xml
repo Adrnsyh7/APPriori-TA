@@ -17,13 +17,20 @@
     <string name="pref_notify_summary">Reminder when countdown has finished.</string>
     <string name="notify_channel_name">Habit Reminder</string>
     <string name="notify_content">Time Up!</string>
-
+    <string name="login_berhasil">Login Success</string>
+    <string name="login_gagal">Login Failed</string>
     <string name="konfirmasi">Konfirmasi</string>
     <string name="confirmation_delete">Apakah kamu yakin akan menghapus transaksi ini?</string>
     <string name="delete_transaction">Hapus</string>
     <string name="cancel">Batal</string>
 
     <string name="your_web_client_id">670130557227-ghfu4blpef0rc3tgtbjtqbgv80fmmsbr.apps.googleusercontent.com</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="message_forgot_password">Email reset password telah dikirim ke %1$s</string>
+    <string name="message_error_forgotpw">Gagal mengirim email reset password. Periksa kembali alamat email Anda.</string>
+    <string name="lupa_password">Lupa Password</string>
+    <string name="message_invalid">Masukkan alamat email yang valid</string>
+    <string name="message_email_not_registered">Email tidak terdaftar</string>
     <string name="setting">Setting</string>
     <string name="logout">Logout</string>
 </resources>
